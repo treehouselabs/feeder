@@ -2,8 +2,8 @@
 
 namespace TreeHouse\Feeder\Resource\Transformer;
 
-use TreeHouse\Feeder\Resource\ResourceInterface;
 use TreeHouse\Feeder\Resource\ResourceCollection;
+use TreeHouse\Feeder\Resource\ResourceInterface;
 
 interface ResourceTransformerInterface
 {
