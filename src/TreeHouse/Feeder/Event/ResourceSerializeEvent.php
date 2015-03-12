@@ -8,7 +8,7 @@ use TreeHouse\Feeder\Resource\ResourceInterface;
 class ResourceSerializeEvent extends Event
 {
     /**
-     * @var Resource
+     * @var ResourceInterface
      */
     protected $resource;
 

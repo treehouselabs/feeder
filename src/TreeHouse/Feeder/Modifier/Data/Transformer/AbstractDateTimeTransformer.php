@@ -4,7 +4,7 @@ namespace TreeHouse\Feeder\Modifier\Data\Transformer;
 
 use TreeHouse\Feeder\Exception\UnexpectedTypeException;
 
-abstract class DateTimeTransformer implements TransformerInterface
+abstract class AbstractDateTimeTransformer implements TransformerInterface
 {
     protected static $formats = array(
         \IntlDateFormatter::NONE,

@@ -61,7 +61,7 @@ abstract class AbstractTransport implements TransportInterface
      */
     public function __clone()
     {
-        $this->destination = false;
+        $this->destination = null;
         $this->connection  = clone $this->connection;
     }
 

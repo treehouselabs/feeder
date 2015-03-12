@@ -10,7 +10,7 @@ use TreeHouse\Feeder\Exception\UnexpectedTypeException;
  *
  * Copied from Symfony's Form component
  */
-class LocalizedStringToDateTimeTransformer extends DateTimeTransformer
+class LocalizedStringToDateTimeTransformer extends AbstractDateTimeTransformer
 {
     /**
      * @var string

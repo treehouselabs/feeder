@@ -13,6 +13,11 @@ class EnumeratedStringToArrayTransformer implements TransformerInterface
     protected $delimiters;
 
     /**
+     * @var string
+     */
+    protected $regex;
+
+    /**
      * @param array $delimiters
      */
     public function __construct(array $delimiters = [])

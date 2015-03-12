@@ -112,7 +112,7 @@ class CsvReader extends AbstractReader
     protected function serialize($data)
     {
         // convert data keys if a mapping is given
-        if (!$this->mapping) {
+        if ($this->mapping === null) {
             $this->mapping = array_combine(array_keys($data), array_keys($data));
         }
 
@@ -180,7 +180,10 @@ class CsvReader extends AbstractReader
         $this->fileObject->setCsvControl($this->delimiter, $this->enclosure, $this->escape);
 
         if ($this->useFirstRow) {
-            $this->setFieldMapping($this->fileObject->current());
+            /** @var array $mapping */
+            $mapping = $this->fileObject->current();
+
+            $this->setFieldMapping($mapping);
             $this->fileObject->next();
         }
     }

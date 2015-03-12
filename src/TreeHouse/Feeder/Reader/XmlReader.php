@@ -221,7 +221,7 @@ class XmlReader extends AbstractReader
         libxml_use_internal_errors($errors);
         libxml_disable_entity_loader($entities);
 
-        if ($error) {
+        if (!empty($error)) {
             throw new ReadException($error);
         }
 
