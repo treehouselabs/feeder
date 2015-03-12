@@ -5,35 +5,25 @@ before_commands:
   - "composer install --prefer-source"
 
 tools:
-  php_code_coverage: true
-
-  php_code_sniffer:
-    config:
-      standard: PSR2
-
   php_cs_fixer:
     config:
       level: all
-
   php_analyzer:
     config:
-      checkstyle:
-        enabled: true
-      verify_php_doc_comments:
-        enabled: true
-      loops_must_use_braces:
-        enabled: true
-      simplify_boolean_return:
-        enabled: true
-      phpunit_checks:
-        enabled: true
-      reflection_fixes:
-        enabled: true
-      use_statement_fixes:
-        order_alphabetically: true
-
-  php_mess_detector: true
-
-  php_cpd: true
-
+      suspicious_code: { enabled: true, overriding_parameter: true }
+      verify_php_doc_comments: { enabled: true }
+      loops_must_use_braces: { enabled: true }
+      simplify_boolean_return: { enabled: true }
+      phpunit_checks: { enabled: true }
+      reflection_fixes: { enabled: true }
+      use_statement_fixes: { enabled: true, order_alphabetically: true }
+  php_code_sniffer:
+    config:
+      standard: PSR2
+  php_loc: true
+  php_pdepend: true
+  php_sim: true
+  php_changetracking: true
   sensiolabs_security_checker: true
+  external_code_coverage:
+    timeout: 1200
