@@ -13,9 +13,9 @@
   "require": {
     "php":                      ">=5.5",
     "ext-mbstring":             "*",
-    "symfony/event-dispatcher": "~2.3",
-    "symfony/http-foundation":  "~2.3",
-    "symfony/serializer":       "~2.5,>=2.5.1",
+    "symfony/event-dispatcher": "~2.6",
+    "symfony/http-foundation":  "~2.6",
+    "symfony/serializer":       "~2.6",
     "guzzlehttp/guzzle":        "~5.0"
   },
   "require-dev": {
