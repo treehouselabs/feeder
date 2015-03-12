@@ -3,6 +3,8 @@ Feeder
 
 Library containing functions to download, parse, transform and export different types of feeds.
 
+[![Build Status](https://travis-ci.org/treehouselabs/feeder.svg)](https://travis-ci.org/treehouselabs/feeder)
+
 ## Usage
 
 Here's a simple feed processing script:
