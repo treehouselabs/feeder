@@ -5,8 +5,8 @@ namespace TreeHouse\Feeder\Resource\Transformer;
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser;
 use TreeHouse\Feeder\Exception\TransportException;
 use TreeHouse\Feeder\Resource\FileResource;
-use TreeHouse\Feeder\Resource\ResourceInterface;
 use TreeHouse\Feeder\Resource\ResourceCollection;
+use TreeHouse\Feeder\Resource\ResourceInterface;
 use TreeHouse\Feeder\Transport\FileTransport;
 
 class UnzipTransformer implements ResourceTransformerInterface
