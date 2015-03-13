@@ -5,6 +5,7 @@ before_commands:
   - "composer install --prefer-source"
 
 tools:
+  php_mess_detector: ~
   php_cs_fixer:
     config:
       level: all

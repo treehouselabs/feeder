@@ -74,7 +74,7 @@ abstract class AbstractTransport implements TransportInterface
     }
 
     /**
-     * @param Connection $connection
+     * @inheritdoc
      */
     public function setConnection(Connection $connection)
     {
@@ -82,7 +82,7 @@ abstract class AbstractTransport implements TransportInterface
     }
 
     /**
-     * @return Connection
+     * @inheritdoc
      */
     public function getConnection()
     {
@@ -90,7 +90,7 @@ abstract class AbstractTransport implements TransportInterface
     }
 
     /**
-     * @param EventDispatcherInterface $dispatcher
+     * @inheritdoc
      */
     public function setEventDispatcher(EventDispatcherInterface $dispatcher)
     {
@@ -122,9 +122,7 @@ abstract class AbstractTransport implements TransportInterface
     }
 
     /**
-     * @param string $destination
-     *
-     * @throws \LogicException
+     * @inheritdoc
      */
     public function setDestination($destination)
     {
@@ -152,9 +150,7 @@ abstract class AbstractTransport implements TransportInterface
     }
 
     /**
-     * @param string $destinationDir
-     *
-     * @throws \LogicException
+     * @inheritdoc
      */
     public function setDestinationDir($destinationDir)
     {
