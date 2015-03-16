@@ -281,7 +281,7 @@ class FtpTransport extends AbstractTransport implements ProgressAwareInterface
             $currentBytes = $bytes;
 
             $this->eventDispatcher->dispatch(
-                FeedEvents::DOWNLOAD_PROGRESS,
+                FeedEvents::FETCH_PROGRESS,
                 new FetchProgressEvent($currentBytes, $diff, $fileSize)
             );
         }
