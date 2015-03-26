@@ -25,7 +25,7 @@ class DataTransformer implements TransformerInterface
     public function __construct(InnerTransformer $transformer, $field)
     {
         $this->transformer = $transformer;
-        $this->field = $field;
+        $this->field       = $field;
     }
 
     /**
@@ -59,6 +59,7 @@ class DataTransformer implements TransformerInterface
 
         try {
             $newValue = $this->transformer->transform($value);
+            $item->set($this->field, $newValue);
         } catch (TransformationFailedException $e) {
             // set the value to null as we couldn't transform it
             $item->set($this->field, null);
@@ -74,7 +75,5 @@ class DataTransformer implements TransformerInterface
                 $e
             );
         }
-
-        $item->set($this->field, $newValue);
     }
 }

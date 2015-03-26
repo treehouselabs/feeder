@@ -12,7 +12,7 @@ class DateTimeToIso8601Transformer implements TransformerInterface
     public function transform($value)
     {
         if (is_null($value)) {
-            return;
+            return null;
         }
 
         if (!$value instanceof \DateTime) {
@@ -21,6 +21,6 @@ class DateTimeToIso8601Transformer implements TransformerInterface
             );
         }
 
-        return $value->format('c');
+        return $value->format(DATE_ISO8601);
     }
 }

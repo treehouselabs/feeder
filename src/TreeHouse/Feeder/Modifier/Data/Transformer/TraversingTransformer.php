@@ -34,8 +34,8 @@ class TraversingTransformer implements TransformerInterface
         }
 
         // traverse through object, transforming each item
-        foreach ($value as &$val) {
-            $val = $this->transformer->transform($val);
+        foreach ($value as $key => $val) {
+            $value[$key] = $this->transformer->transform($val);
         }
 
         return $value;

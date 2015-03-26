@@ -40,4 +40,22 @@ class EnumeratedStringToArrayTransformerTest extends \PHPUnit_Framework_TestCase
             ['foo,bar +baz', ['foo', 'bar', 'baz']],
         ];
     }
+
+    public function testDontTransformNull()
+    {
+        $this->assertNull($this->transformer->transform(null));
+    }
+
+    public function testDontTransformArray()
+    {
+        $this->assertEquals([], $this->transformer->transform([]));
+    }
+
+    /**
+     * @expectedException \TreeHouse\Feeder\Exception\TransformationFailedException
+     */
+    public function testInvalidTransformationValue()
+    {
+        $this->transformer->transform(new \stdClass());
+    }
 }

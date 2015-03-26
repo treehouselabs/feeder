@@ -12,11 +12,6 @@ use TreeHouse\Feeder\Exception\TransformationFailedException;
 class LocalizedStringToNumberTransformer implements TransformerInterface
 {
     /**
-     * @var integer
-     */
-    protected $type;
-
-    /**
      * Number of fraction digits
      *
      * @var integer
@@ -45,22 +40,16 @@ class LocalizedStringToNumberTransformer implements TransformerInterface
     protected $locale;
 
     /**
-     * Constructor
-     *
-     * @param integer $type
      * @param integer $precision
      * @param boolean $grouping
      * @param integer $roundingMode
      * @param string  $locale
      */
-    public function __construct(
-        $type = \NumberFormatter::TYPE_DOUBLE,
-        $precision = null,
-        $grouping = null,
-        $roundingMode = null,
-        $locale = null
-    ) {
-        $this->type = $type;
+    public function __construct($locale = null, $precision = null, $grouping = null, $roundingMode = null)
+    {
+        if (null === $locale) {
+            $locale = \Locale::getDefault();
+        }
 
         if (null === $grouping) {
             $grouping = false;
@@ -70,14 +59,10 @@ class LocalizedStringToNumberTransformer implements TransformerInterface
             $roundingMode = \NumberFormatter::ROUND_HALFUP;
         }
 
-        if (null === $locale) {
-            $locale = \Locale::getDefault();
-        }
-
+        $this->locale       = $locale;
         $this->precision    = $precision;
         $this->grouping     = $grouping;
         $this->roundingMode = $roundingMode;
-        $this->locale       = $locale;
     }
 
     /**
@@ -85,11 +70,7 @@ class LocalizedStringToNumberTransformer implements TransformerInterface
      */
     public function transform($value)
     {
-        if (is_scalar($value)) {
-            $value = (string) $value;
-        }
-
-        if (!is_string($value)) {
+        if (!is_string($value) && !is_numeric($value)) {
             throw new TransformationFailedException(
                 sprintf('Expected a string to transform, got "%s" instead.', json_encode($value))
             );
@@ -115,8 +96,7 @@ class LocalizedStringToNumberTransformer implements TransformerInterface
         if (',' !== $decSep && (!$this->grouping || ',' !== $groupSep)) {
             $value = str_replace(',', $decSep, $value);
         }
-
-        $result = $formatter->parse($value, $this->type, $position);
+        $result = $formatter->parse($value, \NumberFormatter::TYPE_DOUBLE, $position);
 
         if (intl_is_failure($formatter->getErrorCode())) {
             throw new TransformationFailedException($formatter->getErrorMessage());
@@ -129,8 +109,7 @@ class LocalizedStringToNumberTransformer implements TransformerInterface
         $encoding = mb_detect_encoding($value);
         $length = mb_strlen($value, $encoding);
 
-        // After parsing, position holds the index of the character where the
-        // parsing stopped
+        // After parsing, position holds the index of the character where the parsing stopped
         if ($position < $length) {
             // Check if there are unrecognized characters at the end of the
             // number (excluding whitespace characters)
@@ -143,7 +122,8 @@ class LocalizedStringToNumberTransformer implements TransformerInterface
             }
         }
 
-        return $result;
+        // Only the format() method in the NumberFormatter rounds, whereas parse() does not
+        return $this->round($result);
     }
 
     /**
@@ -163,5 +143,49 @@ class LocalizedStringToNumberTransformer implements TransformerInterface
         $formatter->setAttribute(\NumberFormatter::GROUPING_USED, $this->grouping);
 
         return $formatter;
+    }
+
+    /**
+     * Rounds a number according to the configured precision and rounding mode.
+     *
+     * @param int|float $number A number.
+     *
+     * @return int|float The rounded number.
+     */
+    private function round($number)
+    {
+        if (null !== $this->precision && null !== $this->roundingMode) {
+            // shift number to maintain the correct precision during rounding
+            $roundingCoef = pow(10, $this->precision);
+            $number *= $roundingCoef;
+
+            switch ($this->roundingMode) {
+                case \NumberFormatter::ROUND_CEILING:
+                    $number = ceil($number);
+                    break;
+                case \NumberFormatter::ROUND_FLOOR:
+                    $number = floor($number);
+                    break;
+                case \NumberFormatter::ROUND_UP:
+                    $number = $number > 0 ? ceil($number) : floor($number);
+                    break;
+                case \NumberFormatter::ROUND_DOWN:
+                    $number = $number > 0 ? floor($number) : ceil($number);
+                    break;
+                case \NumberFormatter::ROUND_HALFEVEN:
+                    $number = round($number, 0, PHP_ROUND_HALF_EVEN);
+                    break;
+                case \NumberFormatter::ROUND_HALFUP:
+                    $number = round($number, 0, PHP_ROUND_HALF_UP);
+                    break;
+                case \NumberFormatter::ROUND_HALFDOWN:
+                    $number = round($number, 0, PHP_ROUND_HALF_DOWN);
+                    break;
+            }
+
+            $number /= $roundingCoef;
+        }
+
+        return $number;
     }
 }

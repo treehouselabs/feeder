@@ -14,25 +14,23 @@ class ExpandNodeTransformer implements TransformerInterface
     /**
      * @var boolean
      */
-    protected $removeCompound;
+    protected $removeOriginal;
 
     /**
      * @var array
      */
-    protected $overwriteKeys;
+    protected $overwriteExisting;
 
     /**
-     * Constructor
-     *
-     * @param string  $field
-     * @param boolean $removeCompound
-     * @param array   $overwriteKeys
+     * @param string  $field             Expand nodes in this field
+     * @param boolean $removeOriginal    Whether to remove the original node
+     * @param array   $overwriteExisting Keys that may be overwritten when they already exist
      */
-    public function __construct($field, $removeCompound = false, array $overwriteKeys = array())
+    public function __construct($field, $removeOriginal = false, array $overwriteExisting = [])
     {
-        $this->field = $field;
-        $this->removeCompound = $removeCompound;
-        $this->overwriteKeys = $overwriteKeys;
+        $this->field             = $field;
+        $this->removeOriginal    = $removeOriginal;
+        $this->overwriteExisting = $overwriteExisting;
     }
 
     /**
@@ -49,7 +47,7 @@ class ExpandNodeTransformer implements TransformerInterface
             }
 
             // remove the compound field if requested
-            if ($this->removeCompound) {
+            if ($this->removeOriginal) {
                 $item->remove($this->field);
             }
         }
@@ -64,7 +62,7 @@ class ExpandNodeTransformer implements TransformerInterface
         foreach ($value as $key => $val) {
             // if key already exists, check if we may overwrite it
             if ($item->has($key)) {
-                if (!in_array($key, $this->overwriteKeys)) {
+                if (!in_array($key, $this->overwriteExisting)) {
                     continue;
                 }
             }
