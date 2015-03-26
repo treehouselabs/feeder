@@ -15,31 +15,30 @@ class ExpandAttributesTransformer implements TransformerInterface
     /**
      * @var boolean
      */
-    protected $removeCompound;
+    protected $removeOriginal;
 
     /**
      * @var array
      */
-    protected $overwriteKeys;
+    protected $overwriteExisting;
 
     /**
-     * Constructor
-     *
-     * @param string  $field
-     * @param boolean $removeCompound
-     * @param array   $overwriteKeys
+     * @param string  $field             Expand attributes in this field, if omitted, all root-level attributes are
+     *                                   expanded
+     * @param boolean $removeOriginal    Whether to remove the original attribute
+     * @param array   $overwriteExisting Keys that may be overwritten when they already exist
      *
      * @throws UnexpectedTypeException
      */
-    public function __construct($field = null, $removeCompound = false, array $overwriteKeys = array())
+    public function __construct($field = null, $removeOriginal = false, array $overwriteExisting = [])
     {
         if (!is_string($field) && !is_null($field)) {
             throw new UnexpectedTypeException($field, 'string or null');
         }
 
-        $this->field = $field;
-        $this->removeCompound = $removeCompound;
-        $this->overwriteKeys = $overwriteKeys;
+        $this->field             = $field;
+        $this->removeOriginal    = $removeOriginal;
+        $this->overwriteExisting = $overwriteExisting;
     }
 
     /**
@@ -47,45 +46,48 @@ class ExpandAttributesTransformer implements TransformerInterface
      */
     public function transform(ParameterBag $item)
     {
-        if (null === $this->field) {
-            $this->expand($item->all(), $item);
-        } else {
-            if ($item->has($this->field)) {
-                $value = $item->get($this->field);
+        if (!$this->field) {
+            // expand root-level attributes
+            $item->replace($this->expand($item->all()));
 
-                // check if the field is an array
-                if (is_array($value)) {
-                    $this->expand($value, $item);
-                }
-
-                // remove the compound field if requested
-                if ($this->removeCompound) {
-                    $item->remove($this->field);
-                }
-            }
+            return;
         }
+
+        // proceed only when the field exists and is an array
+        $value = $item->get($this->field);
+        if (!is_array($value)) {
+            return;
+        }
+
+        $item->set($this->field, $this->expand($value));
     }
 
     /**
-     * @param array        $value
-     * @param ParameterBag $item
+     * @param array $value
+     *
+     * @return array
      */
-    protected function expand(array $value, ParameterBag $item)
+    protected function expand(array $value)
     {
         foreach ($value as $name => $val) {
             // attributes are converted to @attribute
             if (substr($name, 0, 1) === '@') {
+                if ($this->removeOriginal) {
+                    unset($value[$name]);
+                }
+
+                // the new name
                 $name = ltrim($name, '@');
 
                 // if key already exists, check if we may overwrite it
-                if ($item->has($name)) {
-                    if (!in_array($name, $this->overwriteKeys)) {
-                        continue;
-                    }
+                if (array_key_exists($name, $value) && !in_array($name, $this->overwriteExisting)) {
+                    continue;
                 }
 
-                $item->set($name, $val);
+                $value[$name] = $val;
             }
         }
+
+        return $value;
     }
 }

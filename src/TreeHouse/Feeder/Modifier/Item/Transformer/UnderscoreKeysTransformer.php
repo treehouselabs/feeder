@@ -38,6 +38,7 @@ class UnderscoreKeysTransformer implements TransformerInterface
      * Copied from Doctrine's UnderscoreNamingStrategy
      *
      * @param  string $string
+     *
      * @return string
      */
     protected function underscore($string)

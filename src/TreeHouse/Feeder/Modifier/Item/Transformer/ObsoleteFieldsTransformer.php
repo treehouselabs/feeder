@@ -15,8 +15,6 @@ class ObsoleteFieldsTransformer implements TransformerInterface
     protected $fields;
 
     /**
-     * Constructor
-     *
      * @param array $fields The fields to keep. Any other field will be removed.
      */
     public function __construct(array $fields)

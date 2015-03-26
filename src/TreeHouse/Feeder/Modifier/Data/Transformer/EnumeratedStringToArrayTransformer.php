@@ -2,6 +2,8 @@
 
 namespace TreeHouse\Feeder\Modifier\Data\Transformer;
 
+use TreeHouse\Feeder\Exception\TransformationFailedException;
+
 /**
  * Transforms a string to an array, using one or more delimiters.
  */
@@ -38,10 +40,21 @@ class EnumeratedStringToArrayTransformer implements TransformerInterface
      */
     public function transform($value)
     {
-        if (is_string($value)) {
-            return array_map('trim', preg_split($this->regex, $value, null, PREG_SPLIT_NO_EMPTY));
+        // only transform when we have something to transform
+        if (is_null($value)) {
+            return $value;
         }
 
-        return $value;
+        if (is_array($value)) {
+            return $value;
+        }
+
+        if (!is_scalar($value)) {
+            throw new TransformationFailedException(
+                sprintf('Expected a scalar value to transform, got %s instead.', var_export($value, true))
+            );
+        }
+
+        return array_map('trim', preg_split($this->regex, $value, null, PREG_SPLIT_NO_EMPTY));
     }
 }

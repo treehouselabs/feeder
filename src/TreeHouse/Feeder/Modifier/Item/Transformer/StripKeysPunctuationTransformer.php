@@ -12,11 +12,29 @@ class StripKeysPunctuationTransformer implements TransformerInterface
     protected $punctuation;
 
     /**
+     * @var string
+     */
+    protected $regex;
+
+    /**
      * @param array $punctuation
      */
     public function __construct(array $punctuation = ['.', ',', ':', ';'])
     {
         $this->punctuation = $punctuation;
+
+        $this->regex = sprintf(
+            '/[%s+]/',
+            implode(
+                '',
+                array_map(
+                    function ($value) {
+                        return preg_quote($value, '/');
+                    },
+                    $this->punctuation
+                )
+            )
+        );
     }
 
     /**
@@ -53,19 +71,6 @@ class StripKeysPunctuationTransformer implements TransformerInterface
      */
     protected function strip($string)
     {
-        $regex = sprintf(
-            '/[%s+]/',
-            implode(
-                '',
-                array_map(
-                    function ($value) {
-                        return preg_quote($value, '/');
-                    },
-                    $this->punctuation
-                )
-            )
-        );
-
-        return preg_replace($regex, '', $string);
+        return preg_replace($this->regex, '', $string);
     }
 }

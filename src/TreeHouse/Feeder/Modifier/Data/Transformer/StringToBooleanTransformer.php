@@ -78,7 +78,7 @@ class StringToBooleanTransformer implements TransformerInterface
         }
 
         if (trim($value) === '') {
-            return;
+            return null;
         }
 
         if (in_array(mb_strtolower($value), $this->truthyValues)) {
