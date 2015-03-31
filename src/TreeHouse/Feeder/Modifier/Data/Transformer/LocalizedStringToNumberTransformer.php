@@ -12,6 +12,13 @@ use TreeHouse\Feeder\Exception\TransformationFailedException;
 class LocalizedStringToNumberTransformer implements TransformerInterface
 {
     /**
+     * The locale to use
+     *
+     * @var string
+     */
+    protected $locale;
+
+    /**
      * Number of fraction digits
      *
      * @var integer
@@ -33,17 +40,10 @@ class LocalizedStringToNumberTransformer implements TransformerInterface
     protected $roundingMode;
 
     /**
-     * The locale to use
-     *
-     * @var string
-     */
-    protected $locale;
-
-    /**
+     * @param string  $locale
      * @param integer $precision
      * @param boolean $grouping
      * @param integer $roundingMode
-     * @param string  $locale
      */
     public function __construct($locale = null, $precision = null, $grouping = null, $roundingMode = null)
     {
@@ -96,6 +96,7 @@ class LocalizedStringToNumberTransformer implements TransformerInterface
         if (',' !== $decSep && (!$this->grouping || ',' !== $groupSep)) {
             $value = str_replace(',', $decSep, $value);
         }
+
         $result = $formatter->parse($value, \NumberFormatter::TYPE_DOUBLE, $position);
 
         if (intl_is_failure($formatter->getErrorCode())) {
