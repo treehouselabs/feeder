@@ -18,15 +18,15 @@ class StringToDateTimeTransformer extends AbstractDateTimeTransformer
     protected $format;
 
     /**
+     * @param string  $format         The date format
      * @param string  $inputTimezone  The name of the input timezone
      * @param string  $outputTimezone The name of the output timezone
-     * @param string  $format         The date format
      * @param boolean $resetFields    Whether to reset date/time fields that are not defined in the format
      *
      * @throws  UnexpectedTypeException
      * @throws \InvalidArgumentException
      */
-    public function __construct($inputTimezone = null, $outputTimezone = null, $format = 'Y-m-d H:i:s', $resetFields = true)
+    public function __construct($format = 'Y-m-d H:i:s', $inputTimezone = null, $outputTimezone = null, $resetFields = true)
     {
         parent::__construct($inputTimezone, $outputTimezone);
 

@@ -51,7 +51,7 @@ class StringToDateTimeTransformerTest extends \PHPUnit_Framework_TestCase
      */
     public function testTransform($format, $input, $output)
     {
-        $transformer = new StringToDateTimeTransformer('UTC', 'UTC', $format);
+        $transformer = new StringToDateTimeTransformer($format, 'UTC', 'UTC');
 
         $this->assertEquals(new \DateTime($output), $transformer->transform($input));
     }
@@ -66,7 +66,7 @@ class StringToDateTimeTransformerTest extends \PHPUnit_Framework_TestCase
 
     public function testTransformWithDifferentTimezones()
     {
-        $transformer = new StringToDateTimeTransformer('Asia/Hong_Kong', 'America/New_York', 'Y-m-d H:i:s');
+        $transformer = new StringToDateTimeTransformer('Y-m-d H:i:s', 'Asia/Hong_Kong', 'America/New_York');
 
         $output = new \DateTime('2010-02-03 12:05:06 America/New_York');
         $input = $output->format('Y-m-d H:i:s');
@@ -80,7 +80,7 @@ class StringToDateTimeTransformerTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnexpectedTimezoneType()
     {
-        new StringToDateTimeTransformer(1234);
+        new StringToDateTimeTransformer('Y-m-d H:i:s', 1234);
     }
 
     /**
@@ -89,7 +89,7 @@ class StringToDateTimeTransformerTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidTimezone($inputTz = null, $outputTz = null)
     {
-        new StringToDateTimeTransformer($inputTz, $outputTz);
+        new StringToDateTimeTransformer('Y-m-d H:i:s', $inputTz, $outputTz);
     }
 
     public function invalidTimezoneProvider()
