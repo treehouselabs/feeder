@@ -76,7 +76,6 @@ print_r((new ExpandAttributesTransformer())->transform($item));
 Before:
 
 ```
-/*
 Array
 (
     [id] => 1234
@@ -86,13 +85,11 @@ Array
         )
 
 )
-*/
 ```
 
 After:
 
 ```
-/*
 Array
 (
     [node] => Array
@@ -102,5 +99,4 @@ Array
         )
 
 )
-*/
 ```
