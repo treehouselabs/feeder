@@ -39,7 +39,7 @@ The `LocalizedStringToDateTimeTransformer` was renamed to `StringToDateTimeTrans
 
 ```diff
 -public function __construct($locale = null, $inputTimezone = null, $outputTimezone = null, $dateFormat = null, $timeFormat = null, $calendar = \IntlDateFormatter::GREGORIAN, $pattern = null)
-+public function __construct($inputTimezone = null, $outputTimezone = null, $format = 'Y-m-d H:i:s', $resetFields = true)
++public function __construct($format = 'Y-m-d H:i:s', $inputTimezone = null, $outputTimezone = null, $resetFields = true)
 ```
 
 This change is because the transformer no longer uses the `\DateFormatter` class, but just the `\DateTime::createFromFormat()` method, for which you can provide any format you want.
