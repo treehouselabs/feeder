@@ -54,4 +54,4 @@ The `LocalizedStringToNumberTransformer` has a different constructor signature:
 +public function __construct($locale = null, $precision = null, $grouping = null, $roundingMode = null)
 ```
 
-This is because the type can be inferred by the `precision` argument, and `$locale` is the main argument here (hence the transformer's name) so it makes sense to specify it first.
+This is because the type can be inferred by the `$precision` argument, and `$locale` is the main argument here (hence the transformer's name) so it makes sense to specify it first.
