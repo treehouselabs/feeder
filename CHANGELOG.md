@@ -33,7 +33,7 @@ Feeder now uses Guzzle version 5 instead of the deprecated version 3. If you are
 
 ### API/functionality changes 
 
-**LocalizedStringToDateTimeTransformer**:
+**`LocalizedStringToDateTimeTransformer`**:
 
 The `LocalizedStringToDateTimeTransformer` was renamed to `StringToDateTimeTransformer` and has a different constructor signature:
 
@@ -45,7 +45,7 @@ The `LocalizedStringToDateTimeTransformer` was renamed to `StringToDateTimeTrans
 This change is because the transformer no longer uses the `\DateFormatter` class, but just the `\DateTime::createFromFormat()` method, for which you can provide any format you want.
 
 
-**LocalizedStringToNumberTransformer**:
+**`LocalizedStringToNumberTransformer`**:
 
 The `LocalizedStringToNumberTransformer` has a different constructor signature:
 
@@ -55,3 +55,52 @@ The `LocalizedStringToNumberTransformer` has a different constructor signature:
 ```
 
 This is because the type can be inferred by the `$precision` argument, and `$locale` is the main argument here (hence the transformer's name) so it makes sense to specify it first.
+
+
+**`ExpandAttributesTransformer`**:
+
+The `ExpandAttributesTransformer` now expands attributes on the same level, rather than the level above it.
+
+Example:
+
+```
+$item = new ParameterBag([
+  'node' => [
+    '@id' => 1234,
+  ]
+]);
+
+print_r((new ExpandAttributesTransformer())->transform($item));
+```
+
+Before:
+
+```
+/*
+Array
+(
+    [id] => 1234
+    [node] => Array
+        (
+            [@id] => 1234
+        )
+
+)
+*/
+```
+
+After:
+
+```
+/*
+Array
+(
+    [node] => Array
+        (
+            [id] => 1234
+            [@id] => 1234
+        )
+
+)
+*/
+```
