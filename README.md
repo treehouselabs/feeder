@@ -78,7 +78,12 @@ $feed->addTransformer(new LowercaseKeysTransformer());
 Now we want the publish date to be an actual `DateTime` instance:
 
 ```php
-$transformer = new DataTransformer(new LocalizedStringToDateTimeTransformer(), 'publish_date');
+// the DataTransformer wraps a transformer for a specific field, 
+// instead of the whole item
+$transformer = new DataTransformer(
+    new StringToDateTimeTransformer(DATE_RFC2822), 
+    'publish_date'
+);
 $feed->addTransformer($transformer);
 
 // will return:
@@ -100,7 +105,12 @@ $feed->addTransformer($transformer);
 Some more examples:
 
 ```php
-$feed->addTransformer(new DataTransformer(new StringToBooleanTransformer(), 'explicit'));
+$feed->addTransformer(
+  new DataTransformer(
+    new StringToBooleanTransformer(), 
+    'explicit'
+  )
+);
 $feed->addTransformer(
     new DataTransformer(
         new CallbackTransformer(function ($value) { return $value['@href']; }),
