@@ -8,7 +8,7 @@ If you were using the alpha version, you have to check/fix the following BC brea
 
 ### Dependencies
 
-Feeder now uses Guzzle version 5 instead of the deprecated version 3.
+Feeder now uses Guzzle version 5 instead of the deprecated version 3. If you are extending functionality from the library that addresses Guzzle classes, you need to update those imports and possibly method calls.
 
 
 ### Renamed classes, interfaces, and methods
