@@ -18,7 +18,7 @@ class ResourceCollectionTest extends \PHPUnit_Framework_TestCase
 
         // add 1 at the end
         $resource = new StringResource('test');
-        $collection->enqueueAll([$resource]);
+        $collection->pushAll([$resource]);
         $this->assertCount(4, $collection);
         $this->assertSame($resource, $collection->pop());
 
@@ -77,7 +77,6 @@ class ResourceCollectionTest extends \PHPUnit_Framework_TestCase
             ['current'],
             ['shift'],
             ['pop'],
-            ['dequeue'],
             ['bottom'],
             ['top'],
             ['offsetGet'],

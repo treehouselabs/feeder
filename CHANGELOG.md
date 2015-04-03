@@ -31,7 +31,12 @@ Feeder now uses Guzzle version 5 instead of the deprecated version 3. If you are
 * Removed `getSource`, `getSize`, and `getDestination` from TransportEvent
 
 
-### API/functionality changes 
+### API/functionality changes
+
+**`ResourceCollection`**
+
+The `ResourceCollection` now extends `SplStack` instead of `SplQueue`. That means that the `enqueue` and `dequeue` methods
+are gone. Also the custom `enqueueAll` method was renamed to `pushAll` to maintain consistency with the extended class.
 
 **`LocalizedStringToDateTimeTransformer`**:
 
