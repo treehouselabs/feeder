@@ -22,8 +22,8 @@ class UnzipTransformer implements ResourceTransformerInterface
     protected $files;
 
     /**
-     * @param string $files  The filename(s) in the zip file to return
-     * @param string $target Target directory, defaults to the directory in which the zip is located
+     * @param string|array $files  The filename(s) in the zip file to return
+     * @param string       $target Target directory, defaults to the directory in which the zip is located
      *
      * @throws \InvalidArgumentException
      */
@@ -42,7 +42,7 @@ class UnzipTransformer implements ResourceTransformerInterface
             );
         }
 
-        $this->files = $files;
+        $this->files  = $files;
         $this->target = $target;
     }
 

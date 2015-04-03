@@ -2,7 +2,6 @@
 
 namespace TreeHouse\Feeder\Tests\Resource;
 
-use TreeHouse\Feeder\Resource\FileResource;
 use TreeHouse\Feeder\Resource\ResourceCollection;
 use TreeHouse\Feeder\Resource\ResourceInterface;
 use TreeHouse\Feeder\Resource\StringResource;
