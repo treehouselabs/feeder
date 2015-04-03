@@ -22,6 +22,8 @@ class ResourceCollection extends \SplQueue
     public function __construct(array $resources = [])
     {
         $this->enqueueAll($resources);
+
+        $this->rewind();
     }
 
     /**
@@ -92,8 +94,6 @@ class ResourceCollection extends \SplQueue
         foreach ($resources as $resource) {
             $this->enqueue($resource);
         }
-
-        $this->rewind();
     }
 
     /**
@@ -104,8 +104,6 @@ class ResourceCollection extends \SplQueue
         foreach (array_reverse($resources) as $resource) {
             $this->unshift($resource);
         }
-
-        $this->rewind();
     }
 
     /**
