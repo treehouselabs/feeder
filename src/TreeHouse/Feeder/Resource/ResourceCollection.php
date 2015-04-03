@@ -4,7 +4,7 @@ namespace TreeHouse\Feeder\Resource;
 
 use TreeHouse\Feeder\Resource\Transformer\ResourceTransformerInterface;
 
-class ResourceCollection extends \SplQueue
+class ResourceCollection extends \SplStack
 {
     /**
      * @var ResourceTransformerInterface[]
@@ -21,9 +21,7 @@ class ResourceCollection extends \SplQueue
      */
     public function __construct(array $resources = [])
     {
-        $this->enqueueAll($resources);
-
-        $this->rewind();
+        $this->pushAll($resources);
     }
 
     /**
@@ -55,14 +53,6 @@ class ResourceCollection extends \SplQueue
     /**
      * @return ResourceInterface
      */
-    public function dequeue()
-    {
-        return $this->transform(parent::dequeue());
-    }
-
-    /**
-     * @return ResourceInterface
-     */
     public function bottom()
     {
         return $this->transform(parent::bottom());
@@ -89,11 +79,13 @@ class ResourceCollection extends \SplQueue
     /**
      * @param ResourceInterface[] $resources
      */
-    public function enqueueAll(array $resources)
+    public function pushAll(array $resources)
     {
         foreach ($resources as $resource) {
-            $this->enqueue($resource);
+            $this->push($resource);
         }
+
+        $this->rewind();
     }
 
     /**
@@ -104,6 +96,8 @@ class ResourceCollection extends \SplQueue
         foreach (array_reverse($resources) as $resource) {
             $this->unshift($resource);
         }
+
+        $this->rewind();
     }
 
     /**
