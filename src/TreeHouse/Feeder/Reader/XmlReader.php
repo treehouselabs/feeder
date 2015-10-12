@@ -28,7 +28,7 @@ class XmlReader extends AbstractReader
     protected $serializer;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $key;
 
@@ -134,7 +134,7 @@ class XmlReader extends AbstractReader
             throw new \LogicException('No callback set to get next node');
         }
 
-        $this->key++;
+        ++$this->key;
 
         return call_user_func($this->nextNode, $reader);
     }
@@ -160,8 +160,8 @@ class XmlReader extends AbstractReader
     }
 
     /**
-     * @param string  $file
-     * @param integer $options
+     * @param string $file
+     * @param int    $options
      */
     protected function open($file, $options = null)
     {

@@ -4,8 +4,8 @@ namespace TreeHouse\Feeder\Resource\Transformer;
 
 use TreeHouse\Feeder\Reader\ReaderInterface;
 use TreeHouse\Feeder\Resource\FileResource;
-use TreeHouse\Feeder\Resource\ResourceInterface;
 use TreeHouse\Feeder\Resource\ResourceCollection;
+use TreeHouse\Feeder\Resource\ResourceInterface;
 use TreeHouse\Feeder\Transport\FileTransport;
 use TreeHouse\Feeder\Writer\WriterInterface;
 
@@ -22,26 +22,26 @@ class MultiPartTransformer implements ResourceTransformerInterface
     protected $writer;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $size;
 
     /**
-     * @var integer|null
+     * @var int|null
      */
     protected $maxParts;
 
     /**
      * @param ReaderInterface $reader
      * @param WriterInterface $writer
-     * @param integer         $size
-     * @param integer         $maxParts
+     * @param int             $size
+     * @param int             $maxParts
      */
     public function __construct(ReaderInterface $reader, WriterInterface $writer, $size = 1000, $maxParts = null)
     {
-        $this->reader   = $reader;
-        $this->writer   = $writer;
-        $this->size     = $size;
+        $this->reader = $reader;
+        $this->writer = $writer;
+        $this->size = $size;
         $this->maxParts = $maxParts;
     }
 
@@ -80,7 +80,7 @@ class MultiPartTransformer implements ResourceTransformerInterface
     /**
      * @param ResourceInterface $resource
      *
-     * @return integer
+     * @return int
      */
     protected function isPartFile(ResourceInterface $resource)
     {
@@ -157,7 +157,6 @@ class MultiPartTransformer implements ResourceTransformerInterface
     }
 
     /**
-     * @return void
      */
     protected function endPart()
     {

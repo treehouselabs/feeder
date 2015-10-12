@@ -2,8 +2,8 @@
 
 namespace TreeHouse\Feeder\Tests\Modifier\Item\Mapper;
 
-use TreeHouse\Feeder\Modifier\Item\Mapper\PathMapper;
 use Symfony\Component\HttpFoundation\ParameterBag;
+use TreeHouse\Feeder\Modifier\Item\Mapper\PathMapper;
 
 class PathMapperTest extends \PHPUnit_Framework_TestCase
 {
@@ -41,10 +41,10 @@ class PathMapperTest extends \PHPUnit_Framework_TestCase
     public function testMapping()
     {
         $mapping = [
-            'test-foo'    => 'foo',
-            'test-bar'    => 'bar',
-            'test-baz'    => 'baz',
-            'not-in-item' => 'should not appear in mapped'
+            'test-foo' => 'foo',
+            'test-bar' => 'bar',
+            'test-baz' => 'baz',
+            'not-in-item' => 'should not appear in mapped',
         ];
 
         $item = [
@@ -55,9 +55,9 @@ class PathMapperTest extends \PHPUnit_Framework_TestCase
         ];
 
         $expected = [
-            'foo'      => 'foo value',
-            'bar'      => 'bar value',
-            'baz'      => null,
+            'foo' => 'foo value',
+            'bar' => 'bar value',
+            'baz' => null,
             'unmapped' => 'unmapped value',
         ];
 
@@ -70,20 +70,20 @@ class PathMapperTest extends \PHPUnit_Framework_TestCase
     public function testMappingWithOverride()
     {
         $mapping = [
-            'test-foo'  => 'foo',
+            'test-foo' => 'foo',
             'other-foo' => 'foo',
-            'test-bar'  => 'bar',
+            'test-bar' => 'bar',
         ];
 
         $item = [
-            'test-foo'  => 'foo value',
+            'test-foo' => 'foo value',
             'other-foo' => 'overriden foo value',
-            'test-bar'  => 'bar value',
+            'test-bar' => 'bar value',
         ];
 
         $expected = [
-            'foo'      => 'overriden foo value',
-            'bar'      => 'bar value',
+            'foo' => 'overriden foo value',
+            'bar' => 'bar value',
         ];
 
         $mapper = new PathMapper($mapping);
@@ -95,20 +95,20 @@ class PathMapperTest extends \PHPUnit_Framework_TestCase
     public function testMappingWithNoOverride()
     {
         $mapping = [
-            'test-foo'  => 'foo',
+            'test-foo' => 'foo',
             'other-foo' => 'foo',
-            'test-bar'  => 'bar',
+            'test-bar' => 'bar',
         ];
 
         $item = [
-            'test-foo'  => 'foo value',
+            'test-foo' => 'foo value',
             'other-foo' => '',
-            'test-bar'  => 'bar value',
+            'test-bar' => 'bar value',
         ];
 
         $expected = [
-            'foo'      => 'foo value',
-            'bar'      => 'bar value',
+            'foo' => 'foo value',
+            'bar' => 'bar value',
         ];
 
         $mapper = new PathMapper($mapping);
@@ -120,22 +120,22 @@ class PathMapperTest extends \PHPUnit_Framework_TestCase
     public function testDeepMapping()
     {
         $mapping = [
-            'foo'       => 'foo',
+            'foo' => 'foo',
             'test[bar]' => 'bar',
         ];
 
         $item = [
             'foo' => 'foo value',
             'test' => [
-                'bar' => 'bar value'
-            ]
+                'bar' => 'bar value',
+            ],
         ];
 
         $expected = [
             'foo' => 'foo value',
             'bar' => 'bar value',
             'test' => [
-                'bar' => 'bar value'
+                'bar' => 'bar value',
             ],
         ];
 

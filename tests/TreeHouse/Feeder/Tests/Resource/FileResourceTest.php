@@ -11,7 +11,7 @@ class FileResourceTest extends \PHPUnit_Framework_TestCase
     public function testFileResource()
     {
         $transport = FileTransport::create(__FILE__);
-        $resource  = new FileResource($transport);
+        $resource = new FileResource($transport);
 
         $this->assertInstanceOf(FileResource::class, $resource);
         $this->assertSame($transport, $resource->getTransport());
@@ -28,7 +28,7 @@ class FileResourceTest extends \PHPUnit_Framework_TestCase
     public function testNonExistingFileResource()
     {
         $transport = FileTransport::create('/foo');
-        $resource  = new FileResource($transport);
+        $resource = new FileResource($transport);
 
         $resource->getFile();
     }

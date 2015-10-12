@@ -33,7 +33,7 @@ class JsonToNativeTransformerTest extends \PHPUnit_Framework_TestCase
             ['foo', null],
             ['"foo"', 'foo'],
             ['["foo", "bar"]', ['foo', 'bar']],
-            ['{"foo": "bar"}', ['foo' => 'bar']]
+            ['{"foo": "bar"}', ['foo' => 'bar']],
         ];
     }
 }

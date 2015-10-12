@@ -46,7 +46,7 @@ interface TransportInterface
     public function getLastModifiedDate();
 
     /**
-     * @return integer|null
+     * @return int|null
      */
     public function getSize();
 
@@ -66,7 +66,7 @@ interface TransportInterface
     public function getEventDispatcher();
 
     /**
-     * Purges a previously transported file, removing the destination and whatever cache the transport uses internally
+     * Purges a previously transported file, removing the destination and whatever cache the transport uses internally.
      */
     public function purge();
 

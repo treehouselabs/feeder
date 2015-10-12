@@ -26,11 +26,11 @@ class EmptyValueToNullTransformerTest extends \PHPUnit_Framework_TestCase
 
     public static function getEmptyValues()
     {
-        return array(
-            array(null),
-            array(''),
-            array(array()),
-        );
+        return [
+            [null],
+            [''],
+            [[]],
+        ];
     }
 
     /**
@@ -43,15 +43,15 @@ class EmptyValueToNullTransformerTest extends \PHPUnit_Framework_TestCase
 
     public static function getNonEmptyValues()
     {
-        return array(
-            array(0),
-            array('0'),
-            array(0.0),
-            array(false),
-            array(true),
-            array('foo'),
-            array(1234),
-            array(['foo', 'bar'])
-        );
+        return [
+            [0],
+            ['0'],
+            [0.0],
+            [false],
+            [true],
+            ['foo'],
+            [1234],
+            [['foo', 'bar']],
+        ];
     }
 }

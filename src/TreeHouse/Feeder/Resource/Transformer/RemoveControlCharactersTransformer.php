@@ -3,8 +3,8 @@
 namespace TreeHouse\Feeder\Resource\Transformer;
 
 use TreeHouse\Feeder\Resource\FileResource;
-use TreeHouse\Feeder\Resource\ResourceInterface;
 use TreeHouse\Feeder\Resource\ResourceCollection;
+use TreeHouse\Feeder\Resource\ResourceInterface;
 use TreeHouse\Feeder\Transport\FileTransport;
 
 /**
@@ -13,12 +13,12 @@ use TreeHouse\Feeder\Transport\FileTransport;
 class RemoveControlCharactersTransformer implements ResourceTransformerInterface
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $length;
 
     /**
-     * @param integer $length The number of bytes to read/write while processing the resource
+     * @param int $length The number of bytes to read/write while processing the resource
      */
     public function __construct($length = 8192)
     {

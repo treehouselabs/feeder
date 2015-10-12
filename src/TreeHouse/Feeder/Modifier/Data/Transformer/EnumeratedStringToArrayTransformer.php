@@ -28,7 +28,7 @@ class EnumeratedStringToArrayTransformer implements TransformerInterface
         $this->regex = sprintf('/(%s)+/', implode('|', array_map(function ($delimiter) {
             if (mb_strlen($delimiter) > 1) {
                 // treat it as a word
-                return '\b'.preg_quote($delimiter, '/').'\b';
+                return '\b' . preg_quote($delimiter, '/') . '\b';
             }
 
             return preg_quote($delimiter, '/');

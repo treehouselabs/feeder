@@ -7,14 +7,14 @@ use TreeHouse\Feeder\Exception\UnexpectedTypeException;
 abstract class AbstractDateTimeTransformer implements TransformerInterface
 {
     /**
-     * The name of the input timezone
+     * The name of the input timezone.
      *
      * @var string
      */
     protected $inputTimezone;
 
     /**
-     * The name of the output timezone
+     * The name of the output timezone.
      *
      * @var string
      */

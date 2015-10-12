@@ -8,7 +8,7 @@ use TreeHouse\Feeder\Resource\ResourceCollection;
 interface ReaderInterface extends \Iterator
 {
     /**
-     * Reads the next item in the feed
+     * Reads the next item in the feed.
      *
      * @return ParameterBag
      */

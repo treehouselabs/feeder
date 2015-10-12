@@ -9,7 +9,7 @@ class ItemNotModifiedEventTest extends \PHPUnit_Framework_TestCase
 {
     public function testEvent()
     {
-        $item   = new ParameterBag();
+        $item = new ParameterBag();
         $reason = 'not updated';
 
         $event = new ItemNotModifiedEvent($item, $reason);

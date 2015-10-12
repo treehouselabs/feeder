@@ -13,6 +13,6 @@ class InverseBooleanTransformer implements TransformerInterface
             return;
         }
 
-        return ! (bool) $value;
+        return !(bool) $value;
     }
 }

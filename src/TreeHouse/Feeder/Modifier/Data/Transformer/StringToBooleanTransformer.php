@@ -9,20 +9,20 @@ class StringToBooleanTransformer implements TransformerInterface
     /**
      * @var array
      */
-    protected $defaultTruthyValues = array(
+    protected $defaultTruthyValues = [
         'true',
         'yes',
         'on',
-    );
+    ];
 
     /**
      * @var array
      */
-    protected $defaultFalsyValues = array(
+    protected $defaultFalsyValues = [
         'false',
         'no',
         'off',
-    );
+    ];
 
     /**
      * @var array
@@ -35,9 +35,9 @@ class StringToBooleanTransformer implements TransformerInterface
     protected $falsyValues;
 
     /**
-     * @param array   $truthy
-     * @param array   $falsy
-     * @param boolean $merge
+     * @param array $truthy
+     * @param array $falsy
+     * @param bool  $merge
      */
     public function __construct(array $truthy = [], array $falsy = [], $merge = true)
     {
@@ -54,7 +54,7 @@ class StringToBooleanTransformer implements TransformerInterface
         }
 
         $this->truthyValues = array_map('mb_strtolower', $truthy);
-        $this->falsyValues  = array_map('mb_strtolower', $falsy);
+        $this->falsyValues = array_map('mb_strtolower', $falsy);
     }
 
     /**

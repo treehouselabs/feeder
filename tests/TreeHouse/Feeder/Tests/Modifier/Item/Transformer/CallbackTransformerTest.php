@@ -2,8 +2,8 @@
 
 namespace TreeHouse\Feeder\Tests\Modifier\Item\Transformer;
 
-use TreeHouse\Feeder\Modifier\Item\Transformer\CallbackTransformer;
 use Symfony\Component\HttpFoundation\ParameterBag;
+use TreeHouse\Feeder\Modifier\Item\Transformer\CallbackTransformer;
 
 class CallbackTransformerTest extends \PHPUnit_Framework_TestCase
 {

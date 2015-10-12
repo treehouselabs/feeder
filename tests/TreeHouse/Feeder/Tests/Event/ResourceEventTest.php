@@ -10,9 +10,9 @@ class ResourceEventTest extends \PHPUnit_Framework_TestCase
 {
     public function testEvent()
     {
-        $resource   = new StringResource('foo');
+        $resource = new StringResource('foo');
         $collection = new ResourceCollection([$resource]);
-        $event      = new ResourceEvent($resource, $collection);
+        $event = new ResourceEvent($resource, $collection);
 
         $this->assertInstanceOf(ResourceEvent::class, $event);
         $this->assertSame($resource, $event->getResource());

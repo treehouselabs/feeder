@@ -36,7 +36,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->modifier = new CallbackTransformer(function () {});
-        $this->reader   = new XmlReader(new StringResource('<foo><bar>Baz</bar></foo>'));
+        $this->reader = new XmlReader(new StringResource('<foo><bar>Baz</bar></foo>'));
         $this->reader->setNodeCallback('foo');
     }
 

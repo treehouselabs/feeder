@@ -50,7 +50,6 @@ class UnzipTransformerTest extends \PHPUnit_Framework_TestCase
         $this->collection = new ResourceCollection(
             [new FileResource(FileTransport::create($this->zipFilename))]
         );
-
     }
 
     protected function tearDown()
@@ -58,7 +57,7 @@ class UnzipTransformerTest extends \PHPUnit_Framework_TestCase
         $files = [
             $this->zipFilename,
             $this->filename,
-            __DIR__ . '/' . $this->filename
+            __DIR__ . '/' . $this->filename,
         ];
 
         // clean up when you're done
@@ -70,7 +69,7 @@ class UnzipTransformerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests various constructions of the transformer
+     * Tests various constructions of the transformer.
      */
     public function testConstructor()
     {
@@ -92,7 +91,7 @@ class UnzipTransformerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests the basic transformer functionality
+     * Tests the basic transformer functionality.
      */
     public function testUnzip()
     {
@@ -103,7 +102,7 @@ class UnzipTransformerTest extends \PHPUnit_Framework_TestCase
         $count = 0;
         foreach ($this->collection as $resource) {
             // We should get here only once, for the unzipped file. Any other iteration will fail here
-            $count++;
+            ++$count;
 
             $this->assertSame($this->filename, $resource->getFile()->getBasename());
             $this->assertSame($this->fileContents, $resource->getFile()->fgets());
@@ -113,7 +112,7 @@ class UnzipTransformerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests extraction to different target directory
+     * Tests extraction to different target directory.
      */
     public function testUnzipToTarget()
     {
@@ -126,7 +125,7 @@ class UnzipTransformerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that unzipping is skipped when target exists
+     * Tests that unzipping is skipped when target exists.
      */
     public function testSkipUnzip()
     {
@@ -149,7 +148,7 @@ class UnzipTransformerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that unzipping is not skipped when target exists but is older than zip
+     * Tests that unzipping is not skipped when target exists but is older than zip.
      */
     public function testDontSkipUnzip()
     {

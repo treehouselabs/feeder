@@ -25,7 +25,7 @@ class FailedItemModificationEvent extends Event
     protected $exception;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $continue = false;
 
@@ -36,8 +36,8 @@ class FailedItemModificationEvent extends Event
      */
     public function __construct(ParameterBag $item, ModifierInterface $modifier, ModificationException $exception)
     {
-        $this->item      = $item;
-        $this->modifier  = $modifier;
+        $this->item = $item;
+        $this->modifier = $modifier;
         $this->exception = $exception;
     }
 
@@ -66,7 +66,7 @@ class FailedItemModificationEvent extends Event
     }
 
     /**
-     * @param boolean $bool
+     * @param bool $bool
      */
     public function setContinue($bool)
     {
@@ -74,7 +74,7 @@ class FailedItemModificationEvent extends Event
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getContinue()
     {

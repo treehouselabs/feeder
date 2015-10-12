@@ -13,7 +13,7 @@ class CallbackFilter implements FilterInterface
     protected $callback;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param callable $callback
      *

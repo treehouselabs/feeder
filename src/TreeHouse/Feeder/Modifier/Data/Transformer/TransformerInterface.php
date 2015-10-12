@@ -9,9 +9,9 @@ interface TransformerInterface
     /**
      * @param mixed $value
      *
+     * @throws TransformationFailedException
      * @return mixed
      *
-     * @throws TransformationFailedException
      */
     public function transform($value);
 }

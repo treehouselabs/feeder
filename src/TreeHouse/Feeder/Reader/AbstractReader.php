@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use TreeHouse\Feeder\Event\ResourceEvent;
 use TreeHouse\Feeder\Event\ResourceSerializeEvent;
 use TreeHouse\Feeder\FeedEvents;
-use TreeHouse\Feeder\Resource\ResourceInterface;
 use TreeHouse\Feeder\Resource\ResourceCollection;
+use TreeHouse\Feeder\Resource\ResourceInterface;
 
 abstract class AbstractReader implements ReaderInterface
 {
@@ -29,7 +29,7 @@ abstract class AbstractReader implements ReaderInterface
     protected $eventDispatcher;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $initialized;
 
@@ -229,7 +229,7 @@ abstract class AbstractReader implements ReaderInterface
     }
 
     /**
-     * Serializes a read item into a ParameterBag
+     * Serializes a read item into a ParameterBag.
      *
      * @param string $data
      *
@@ -238,7 +238,7 @@ abstract class AbstractReader implements ReaderInterface
     abstract protected function serialize($data);
 
     /**
-     * Creates a reader for a resource
+     * Creates a reader for a resource.
      *
      * @param ResourceInterface $resource
      */

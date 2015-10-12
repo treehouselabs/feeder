@@ -40,7 +40,7 @@ class FileTransportTest extends AbstractTransportTest
 
     public function testFileAttributes()
     {
-        $filename  = $this->getFilename();
+        $filename = $this->getFilename();
         $transport = FileTransport::create($filename);
 
         $this->assertEquals(basename($filename), $transport->getFilename());
@@ -50,7 +50,7 @@ class FileTransportTest extends AbstractTransportTest
 
     public function testDefaultDestination()
     {
-        $filename  = $this->getFilename();
+        $filename = $this->getFilename();
         $transport = FileTransport::create($filename);
         $transport->setDestinationDir(sys_get_temp_dir());
 
@@ -59,7 +59,7 @@ class FileTransportTest extends AbstractTransportTest
 
     public function testDefaultDestinationSameDir()
     {
-        $filename  = $this->getFilename();
+        $filename = $this->getFilename();
         $transport = FileTransport::create($filename);
         $transport->setDestinationDir(dirname($filename));
 

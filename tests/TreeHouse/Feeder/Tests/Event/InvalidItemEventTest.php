@@ -9,7 +9,7 @@ class InvalidItemEventTest extends \PHPUnit_Framework_TestCase
 {
     public function testEvent()
     {
-        $item   = new ParameterBag();
+        $item = new ParameterBag();
         $reason = 'because';
 
         $event = new InvalidItemEvent($item, $reason);

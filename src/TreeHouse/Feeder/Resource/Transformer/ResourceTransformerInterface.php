@@ -18,7 +18,7 @@ interface ResourceTransformerInterface
     /**
      * @param ResourceInterface $resource
      *
-     * @return boolean
+     * @return bool
      */
     public function needsTransforming(ResourceInterface $resource);
 }

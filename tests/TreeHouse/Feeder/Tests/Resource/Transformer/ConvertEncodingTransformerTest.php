@@ -22,7 +22,7 @@ class ConvertEncodingTransformerTest extends \PHPUnit_Framework_TestCase
     {
         // this is UTF-8
         $from = 'This is á test';
-        $to   = $from;
+        $to = $from;
 
         if ($fromEncoding !== 'UTF-8') {
             $from = iconv('UTF-8', $fromEncoding, $from);

@@ -3,12 +3,12 @@
 namespace TreeHouse\Feeder\Resource\Transformer;
 
 use TreeHouse\Feeder\Resource\FileResource;
-use TreeHouse\Feeder\Resource\ResourceInterface;
 use TreeHouse\Feeder\Resource\ResourceCollection;
+use TreeHouse\Feeder\Resource\ResourceInterface;
 use TreeHouse\Feeder\Transport\FileTransport;
 
 /**
- * Converts character encoding
+ * Converts character encoding.
  */
 class ConvertEncodingTransformer implements ResourceTransformerInterface
 {
@@ -29,7 +29,7 @@ class ConvertEncodingTransformer implements ResourceTransformerInterface
     public function __construct($fromEncoding, $toEncoding = null)
     {
         $this->fromEncoding = $fromEncoding;
-        $this->toEncoding   = $toEncoding ?: mb_internal_encoding();
+        $this->toEncoding = $toEncoding ?: mb_internal_encoding();
     }
 
     /**
@@ -87,7 +87,7 @@ class ConvertEncodingTransformer implements ResourceTransformerInterface
      */
     protected function rename($file)
     {
-        $tmpFile = $file.'.tmp';
+        $tmpFile = $file . '.tmp';
 
         if (rename($file, $tmpFile)) {
             return $tmpFile;

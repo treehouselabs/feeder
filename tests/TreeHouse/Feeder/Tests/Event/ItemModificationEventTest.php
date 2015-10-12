@@ -9,7 +9,7 @@ class ItemModificationEventTest extends \PHPUnit_Framework_TestCase
 {
     public function testEvent()
     {
-        $item  = new ParameterBag();
+        $item = new ParameterBag();
         $event = new ItemModificationEvent($item);
 
         $this->assertInstanceOf(ItemModificationEvent::class, $event);

@@ -23,7 +23,7 @@ class InvalidItemEvent extends Event
      */
     public function __construct(ParameterBag $item, $reason)
     {
-        $this->item   = $item;
+        $this->item = $item;
         $this->reason = $reason;
     }
 

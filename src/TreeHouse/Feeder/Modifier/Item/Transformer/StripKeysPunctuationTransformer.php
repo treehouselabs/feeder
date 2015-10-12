@@ -66,7 +66,8 @@ class StripKeysPunctuationTransformer implements TransformerInterface
     }
 
     /**
-     * @param  string $string
+     * @param string $string
+     *
      * @return string
      */
     protected function strip($string)

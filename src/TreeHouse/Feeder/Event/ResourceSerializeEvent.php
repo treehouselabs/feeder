@@ -24,7 +24,7 @@ class ResourceSerializeEvent extends Event
     public function __construct(ResourceInterface $resource, &$item)
     {
         $this->resource = $resource;
-        $this->item     = &$item;
+        $this->item = &$item;
     }
 
     /**

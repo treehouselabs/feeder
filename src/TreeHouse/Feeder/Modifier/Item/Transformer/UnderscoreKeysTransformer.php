@@ -35,9 +35,9 @@ class UnderscoreKeysTransformer implements TransformerInterface
     }
 
     /**
-     * Copied from Doctrine's UnderscoreNamingStrategy
+     * Copied from Doctrine's UnderscoreNamingStrategy.
      *
-     * @param  string $string
+     * @param string $string
      *
      * @return string
      */

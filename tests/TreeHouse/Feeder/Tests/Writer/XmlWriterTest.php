@@ -9,7 +9,7 @@ class XmlWriterTest extends \PHPUnit_Framework_TestCase
 {
     public function testWriter()
     {
-        $file   = new TempFile();
+        $file = new TempFile();
         $writer = new XmlWriter($file);
 
         $this->assertInstanceOf(XmlWriter::class, $writer);
@@ -30,7 +30,7 @@ XML
 
     public function testRootNode()
     {
-        $file   = new TempFile();
+        $file = new TempFile();
         $writer = new XmlWriter($file);
 
         $writer->setRootNode('foo');

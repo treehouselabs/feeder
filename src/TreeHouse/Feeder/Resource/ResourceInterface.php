@@ -13,9 +13,9 @@ interface ResourceInterface
     public function getTransport();
 
     /**
+     * @throws TransportException
      * @return \SplFileObject
      *
-     * @throws TransportException
      */
     public function getFile();
 

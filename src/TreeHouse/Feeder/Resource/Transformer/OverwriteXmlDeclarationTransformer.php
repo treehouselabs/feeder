@@ -3,8 +3,8 @@
 namespace TreeHouse\Feeder\Resource\Transformer;
 
 use TreeHouse\Feeder\Resource\FileResource;
-use TreeHouse\Feeder\Resource\ResourceInterface;
 use TreeHouse\Feeder\Resource\ResourceCollection;
+use TreeHouse\Feeder\Resource\ResourceInterface;
 use TreeHouse\Feeder\Transport\FileTransport;
 
 /**
@@ -39,8 +39,8 @@ class OverwriteXmlDeclarationTransformer implements ResourceTransformerInterface
 
         // the file could be big, so just read the
         $tmpFile = tempnam(sys_get_temp_dir(), $file);
-        $old     = fopen($file, 'r');
-        $new     = fopen($tmpFile, 'w');
+        $old = fopen($file, 'r');
+        $new = fopen($tmpFile, 'w');
 
         // write the beginning with the xml declaration replaced
         fwrite($new, preg_replace($this->xmlDeclarationRegEx, $this->xmlDeclaration, fread($old, 96)));

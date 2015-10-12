@@ -9,8 +9,6 @@ interface TransformerInterface extends ModifierInterface
 {
     /**
      * @param ParameterBag $item
-     *
-     * @return void
      */
     public function transform(ParameterBag $item);
 }

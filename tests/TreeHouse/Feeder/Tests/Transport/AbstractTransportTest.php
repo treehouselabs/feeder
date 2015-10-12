@@ -116,8 +116,8 @@ abstract class AbstractTransportTest extends \PHPUnit_Framework_TestCase
     public function testPurge()
     {
         $transport = $this->getTransport();
-        $file      = $transport->getFile();
-        $filename  = $file->getPathname();
+        $file = $transport->getFile();
+        $filename = $file->getPathname();
 
         $this->assertTrue(file_exists($filename));
 

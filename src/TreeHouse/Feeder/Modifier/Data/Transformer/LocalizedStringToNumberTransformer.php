@@ -12,38 +12,38 @@ use TreeHouse\Feeder\Exception\TransformationFailedException;
 class LocalizedStringToNumberTransformer implements TransformerInterface
 {
     /**
-     * The locale to use
+     * The locale to use.
      *
      * @var string
      */
     protected $locale;
 
     /**
-     * Number of fraction digits
+     * Number of fraction digits.
      *
-     * @var integer
+     * @var int
      */
     protected $precision;
 
     /**
-     * Whether to use a grouping separator
+     * Whether to use a grouping separator.
      *
-     * @var boolean
+     * @var bool
      */
     protected $grouping;
 
     /**
-     * The rounding mode to use
+     * The rounding mode to use.
      *
-     * @var integer
+     * @var int
      */
     protected $roundingMode;
 
     /**
-     * @param string  $locale
-     * @param integer $precision
-     * @param boolean $grouping
-     * @param integer $roundingMode
+     * @param string $locale
+     * @param int    $precision
+     * @param bool   $grouping
+     * @param int    $roundingMode
      */
     public function __construct($locale = null, $precision = null, $grouping = null, $roundingMode = null)
     {
@@ -59,9 +59,9 @@ class LocalizedStringToNumberTransformer implements TransformerInterface
             $roundingMode = \NumberFormatter::ROUND_HALFUP;
         }
 
-        $this->locale       = $locale;
-        $this->precision    = $precision;
-        $this->grouping     = $grouping;
+        $this->locale = $locale;
+        $this->precision = $precision;
+        $this->grouping = $grouping;
         $this->roundingMode = $roundingMode;
     }
 
@@ -128,7 +128,7 @@ class LocalizedStringToNumberTransformer implements TransformerInterface
     }
 
     /**
-     * Returns a preconfigured \NumberFormatter instance
+     * Returns a preconfigured \NumberFormatter instance.
      *
      * @return \NumberFormatter
      */
