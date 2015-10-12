@@ -13,9 +13,10 @@ class CallbackValidator implements ValidatorInterface
     protected $callback;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  callable                $callback
+     * @param callable $callback
+     *
      * @throws UnexpectedTypeException
      */
     public function __construct($callback)

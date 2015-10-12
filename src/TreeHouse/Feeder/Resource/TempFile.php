@@ -23,7 +23,7 @@ final class TempFile extends \SplFileObject
     }
 
     /**
-     * Clean up when done
+     * Clean up when done.
      */
     public function __destruct()
     {

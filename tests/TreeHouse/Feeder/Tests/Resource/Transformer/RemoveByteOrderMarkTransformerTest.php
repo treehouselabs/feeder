@@ -13,16 +13,16 @@ class RemoveByteOrderMarkTransformerTest extends \PHPUnit_Framework_TestCase
      */
     public function testTransform($bom)
     {
-        $to   = 'Look ma, no BOM!';
+        $to = 'Look ma, no BOM!';
         $from = sprintf('%s%s', pack('H*', $bom), $to);
 
-        $resource   = new StringResource($from);
+        $resource = new StringResource($from);
         $collection = new ResourceCollection([$resource]);
 
         $transformer = new RemoveByteOrderMarkTransformer();
 
         $resource = $transformer->transform($resource, $collection);
-        $file     = $resource->getFile()->getPathname();
+        $file = $resource->getFile()->getPathname();
 
         $this->assertSame($to, file_get_contents($file));
     }

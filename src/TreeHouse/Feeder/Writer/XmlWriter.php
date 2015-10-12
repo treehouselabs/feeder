@@ -17,7 +17,7 @@ class XmlWriter implements WriterInterface
     protected $writer;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $indent = false;
 
@@ -35,11 +35,11 @@ class XmlWriter implements WriterInterface
     }
 
     /**
-     * The clone magic method
+     * The clone magic method.
      */
     public function __clone()
     {
-        $this->file   = null;
+        $this->file = null;
         $this->writer = null;
     }
 
@@ -52,7 +52,7 @@ class XmlWriter implements WriterInterface
     }
 
     /**
-     * @param boolean $ident
+     * @param bool $ident
      */
     public function setIndent($ident)
     {

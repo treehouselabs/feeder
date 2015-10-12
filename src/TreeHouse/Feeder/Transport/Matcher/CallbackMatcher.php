@@ -12,9 +12,10 @@ class CallbackMatcher implements MatcherInterface
     protected $callback;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  callable                $callback
+     * @param callable $callback
+     *
      * @throws UnexpectedTypeException
      */
     public function __construct($callback)

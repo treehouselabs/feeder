@@ -7,12 +7,12 @@ use TreeHouse\Feeder\Exception\TransformationFailedException;
 class NormalizedArrayTransformer implements TransformerInterface
 {
     /**
-     * @var boolean
+     * @var bool
      */
     protected $nestedArrays;
 
     /**
-     * @param boolean $nestedArrays
+     * @param bool $nestedArrays
      */
     public function __construct($nestedArrays = false)
     {

@@ -77,7 +77,7 @@ class Feed
 
     /**
      * @param FilterInterface $filter
-     * @param integer|null    $position
+     * @param int|null        $position
      */
     public function addFilter(FilterInterface $filter, $position = null)
     {
@@ -86,7 +86,7 @@ class Feed
 
     /**
      * @param MapperInterface $mapper
-     * @param integer|null    $position
+     * @param int|null        $position
      */
     public function addMapper(MapperInterface $mapper, $position = null)
     {
@@ -95,7 +95,7 @@ class Feed
 
     /**
      * @param TransformerInterface $transformer
-     * @param integer|null         $position
+     * @param int|null             $position
      */
     public function addTransformer(TransformerInterface $transformer, $position = null)
     {
@@ -104,7 +104,7 @@ class Feed
 
     /**
      * @param ValidatorInterface $validator
-     * @param integer|null       $position
+     * @param int|null           $position
      */
     public function addValidator(ValidatorInterface $validator, $position = null)
     {
@@ -113,8 +113,8 @@ class Feed
 
     /**
      * @param ModifierInterface $modifier
-     * @param integer           $position
-     * @param boolean           $continueOnException
+     * @param int               $position
+     * @param bool              $continueOnException
      *
      * @throws \InvalidArgumentException
      */
@@ -153,7 +153,7 @@ class Feed
     }
 
     /**
-     * @param integer $position
+     * @param int $position
      *
      * @throws \OutOfBoundsException
      */
@@ -167,9 +167,9 @@ class Feed
     }
 
     /**
-     * @param integer $position
+     * @param int $position
      *
-     * @return boolean
+     * @return bool
      */
     public function hasModifierAt($position)
     {

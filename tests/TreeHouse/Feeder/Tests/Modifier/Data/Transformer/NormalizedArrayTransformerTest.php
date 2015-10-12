@@ -50,5 +50,4 @@ class NormalizedArrayTransformerTest extends \PHPUnit_Framework_TestCase
         $transformer = new NormalizedArrayTransformer();
         $transformer->transform(new \stdClass());
     }
-
 }

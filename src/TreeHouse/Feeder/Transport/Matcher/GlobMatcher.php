@@ -17,7 +17,7 @@ class GlobMatcher extends PatternMatcher
         $this->globPattern = $pattern;
         $parts = array_map('preg_quote', preg_split('/\*/', $pattern));
 
-        parent::__construct('#^'.implode('[^\/]+', $parts).'$#i');
+        parent::__construct('#^' . implode('[^\/]+', $parts) . '$#i');
     }
 
     public function __toString()

@@ -3,8 +3,8 @@
 namespace TreeHouse\Feeder\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use TreeHouse\Feeder\Resource\ResourceInterface;
 use TreeHouse\Feeder\Resource\ResourceCollection;
+use TreeHouse\Feeder\Resource\ResourceInterface;
 
 class ResourceEvent extends Event
 {
@@ -19,12 +19,12 @@ class ResourceEvent extends Event
     protected $resources;
 
     /**
-     * @param ResourceInterface $resource
+     * @param ResourceInterface  $resource
      * @param ResourceCollection $resources
      */
     public function __construct(ResourceInterface $resource, ResourceCollection $resources)
     {
-        $this->resource  = $resource;
+        $this->resource = $resource;
         $this->resources = $resources;
     }
 

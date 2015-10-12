@@ -19,9 +19,9 @@ class ResourceSerializeEventTest extends \PHPUnit_Framework_TestCase
 
     public function testEvent()
     {
-        $item     = static::$item;
+        $item = static::$item;
         $resource = new StringResource($item);
-        $event    = new ResourceSerializeEvent($resource, $item);
+        $event = new ResourceSerializeEvent($resource, $item);
 
         $this->assertEquals($resource, $event->getResource());
 

@@ -25,7 +25,7 @@ class DataTransformer implements TransformerInterface
     public function __construct(InnerTransformer $transformer, $field)
     {
         $this->transformer = $transformer;
-        $this->field       = $field;
+        $this->field = $field;
     }
 
     /**

@@ -11,8 +11,8 @@ class StripKeysPunctuationTransformerTest extends \PHPUnit_Framework_TestCase
     {
         $item = new ParameterBag([
             'f.o.o' => 'foo',
-            'b,ar'  => 'bar',
-            'baz'   => [
+            'b,ar' => 'bar',
+            'baz' => [
                 'foo:baz' => 'foobaz1',
                 'foo;baz' => 'foobaz2',
             ],
@@ -37,7 +37,7 @@ class StripKeysPunctuationTransformerTest extends \PHPUnit_Framework_TestCase
     {
         $item = new ParameterBag([
             'f.o.o' => 'foo',
-            'b&ar'  => 'bar',
+            'b&ar' => 'bar',
         ]);
 
         $transformer = new StripKeysPunctuationTransformer(['&']);
@@ -46,7 +46,7 @@ class StripKeysPunctuationTransformerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             [
                 'f.o.o' => 'foo',
-                'bar'   => 'bar',
+                'bar' => 'bar',
             ],
             $item->all()
         );

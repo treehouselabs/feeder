@@ -8,7 +8,7 @@ use TreeHouse\Feeder\Modifier\Data\Transformer\TransformerInterface as DataTrans
 class RecursiveTransformer implements TransformerInterface
 {
     /**
-     * Transformer that will be applied recursively
+     * Transformer that will be applied recursively.
      *
      * @var DataTransformerInterface
      */
@@ -25,7 +25,8 @@ class RecursiveTransformer implements TransformerInterface
     }
 
     /**
-     * @param  ParameterBag $item
+     * @param ParameterBag $item
+     *
      * @return mixed
      */
     public function transform(ParameterBag $item)

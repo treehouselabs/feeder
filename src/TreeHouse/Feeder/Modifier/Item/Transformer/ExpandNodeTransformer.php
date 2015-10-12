@@ -12,7 +12,7 @@ class ExpandNodeTransformer implements TransformerInterface
     protected $field;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $removeOriginal;
 
@@ -22,14 +22,14 @@ class ExpandNodeTransformer implements TransformerInterface
     protected $overwriteExisting;
 
     /**
-     * @param string  $field             Expand nodes in this field
-     * @param boolean $removeOriginal    Whether to remove the original node
-     * @param array   $overwriteExisting Keys that may be overwritten when they already exist
+     * @param string $field             Expand nodes in this field
+     * @param bool   $removeOriginal    Whether to remove the original node
+     * @param array  $overwriteExisting Keys that may be overwritten when they already exist
      */
     public function __construct($field, $removeOriginal = false, array $overwriteExisting = [])
     {
-        $this->field             = $field;
-        $this->removeOriginal    = $removeOriginal;
+        $this->field = $field;
+        $this->removeOriginal = $removeOriginal;
         $this->overwriteExisting = $overwriteExisting;
     }
 

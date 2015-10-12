@@ -5,7 +5,7 @@ namespace TreeHouse\Feeder\Modifier\Item\Transformer;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
- * Makes sure obsolete fields are removed
+ * Makes sure obsolete fields are removed.
  */
 class ObsoleteFieldsTransformer implements TransformerInterface
 {

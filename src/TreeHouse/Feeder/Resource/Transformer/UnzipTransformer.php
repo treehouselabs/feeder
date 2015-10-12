@@ -42,7 +42,7 @@ class UnzipTransformer implements ResourceTransformerInterface
             );
         }
 
-        $this->files  = $files;
+        $this->files = $files;
         $this->target = $target;
     }
 
@@ -93,7 +93,7 @@ class UnzipTransformer implements ResourceTransformerInterface
     /**
      * @param ResourceInterface $resource
      *
-     * @return boolean
+     * @return bool
      */
     protected function needsUnzipping(ResourceInterface $resource)
     {
@@ -110,7 +110,7 @@ class UnzipTransformer implements ResourceTransformerInterface
     /**
      * @param ResourceInterface $resource
      *
-     * @return boolean
+     * @return bool
      */
     protected function isExtractable(ResourceInterface $resource)
     {

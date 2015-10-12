@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
  * Performs deep path search in ParameterBag.
- * This supports fields like: foo[bar][baz]
+ * This supports fields like: foo[bar][baz].
  */
 class PathMapper implements MapperInterface
 {
@@ -16,15 +16,15 @@ class PathMapper implements MapperInterface
     protected $mapping = [];
 
     /**
-     * Whether to use deep path search. This supports fields like: foo[bar][baz]
+     * Whether to use deep path search. This supports fields like: foo[bar][baz].
      *
-     * @var boolean
+     * @var bool
      */
     protected $deep = true;
 
     /**
-     * @param array   $mapping The mapping
-     * @param boolean $deep    Whether to use deep path search. This supports fields like: foo[bar][baz]
+     * @param array $mapping The mapping
+     * @param bool  $deep    Whether to use deep path search. This supports fields like: foo[bar][baz]
      */
     public function __construct(array $mapping = [], $deep = true)
     {
@@ -104,12 +104,12 @@ class PathMapper implements MapperInterface
     }
 
     /**
-     * Decides whether a value may override a previous value
+     * Decides whether a value may override a previous value.
      *
      * @param mixed $previous
      * @param mixed $value
      *
-     * @return boolean
+     * @return bool
      *
      * @todo implement override strategy with options: keep and override
      */

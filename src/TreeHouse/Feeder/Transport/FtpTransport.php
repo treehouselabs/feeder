@@ -28,21 +28,22 @@ class FtpTransport extends AbstractTransport implements ProgressAwareInterface
     protected $fileMatcher;
 
     /**
-     * @param  string       $host
-     * @param  string       $user
-     * @param  string       $pass
-     * @param  string       $file
-     * @param  array        $options
+     * @param string $host
+     * @param string $user
+     * @param string $pass
+     * @param string $file
+     * @param array  $options
+     *
      * @return FtpTransport
      */
     public static function create($host, $user = null, $pass = null, $file, array $options = [])
     {
         $conn = new Connection(array_merge(
             [
-                'host'    => $host,
-                'user'    => $user,
-                'pass'    => $pass,
-                'file'    => $file,
+                'host' => $host,
+                'user' => $user,
+                'pass' => $pass,
+                'file' => $file,
                 'timeout' => 10,
             ],
             $options
@@ -74,7 +75,7 @@ class FtpTransport extends AbstractTransport implements ProgressAwareInterface
             $file = $this->connection['file'];
         }
 
-        return $this->connection['host'].':/'.$file;
+        return $this->connection['host'] . ':/' . $file;
     }
 
     /**
@@ -126,7 +127,7 @@ class FtpTransport extends AbstractTransport implements ProgressAwareInterface
     }
 
     /**
-     * @param boolean $pasv
+     * @param bool $pasv
      */
     public function setPasv($pasv)
     {
@@ -142,7 +143,7 @@ class FtpTransport extends AbstractTransport implements ProgressAwareInterface
     }
 
     /**
-     * @param boolean $pattern
+     * @param bool $pattern
      */
     public function setPattern($pattern)
     {
@@ -162,8 +163,9 @@ class FtpTransport extends AbstractTransport implements ProgressAwareInterface
      * Returns the file to download from the ftp. Handles globbing rules and
      * checks if the file is listed in the remote dir.
      *
-     * @return string
      * @throws TransportException When remote file could not be found
+     * @return string
+     *
      */
     public function getFilename()
     {
@@ -182,12 +184,12 @@ class FtpTransport extends AbstractTransport implements ProgressAwareInterface
     {
         // see if uploaded feed is newer
         if ($time = ftp_mdtm($this->getFtpConnection(), $this->getFilename())) {
-            return new \DateTime('@'.$time);
+            return new \DateTime('@' . $time);
         }
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getSize()
     {
@@ -215,8 +217,10 @@ class FtpTransport extends AbstractTransport implements ProgressAwareInterface
     }
 
     /**
-     * @param  MatcherInterface   $matcher
+     * @param MatcherInterface $matcher
+     *
      * @throws TransportException
+     *
      * @return string
      */
     protected function searchFile(MatcherInterface $matcher)
@@ -258,18 +262,19 @@ class FtpTransport extends AbstractTransport implements ProgressAwareInterface
     }
 
     /**
-     * @return string
      * @throws TransportException
+     * @return string
+     *
      */
     protected function downloadToTmpFile()
     {
         $conn = $this->getFtpConnection();
         $file = $this->getFilename();
-        $tmpFile = sys_get_temp_dir().DIRECTORY_SEPARATOR.basename($file);
+        $tmpFile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . basename($file);
 
         $fileSize = $this->getSize();
 
-        $mode = $this->getMode() ? constant('FTP_'.strtoupper($this->getMode())) : FTP_ASCII;
+        $mode = $this->getMode() ? constant('FTP_' . strtoupper($this->getMode())) : FTP_ASCII;
 
         $ret = ftp_nb_get($conn, $tmpFile, $file, $mode);
         $currentBytes = 0;
@@ -294,7 +299,7 @@ class FtpTransport extends AbstractTransport implements ProgressAwareInterface
     }
 
     /**
-     * Returns shared ftp connection
+     * Returns shared ftp connection.
      *
      * @return resource
      */
@@ -320,13 +325,15 @@ class FtpTransport extends AbstractTransport implements ProgressAwareInterface
     }
 
     /**
-     * Connects to ftp
+     * Connects to ftp.
      *
-     * @param  string             $host
-     * @param  string             $user
-     * @param  string             $pass
-     * @return resource
+     * @param string $host
+     * @param string $user
+     * @param string $pass
+     *
      * @throws TransportException
+     * @return resource
+     *
      */
     protected function connect($host, $user, $pass)
     {
@@ -341,7 +348,7 @@ class FtpTransport extends AbstractTransport implements ProgressAwareInterface
     }
 
     /**
-     * Closes shared ftp connection
+     * Closes shared ftp connection.
      */
     protected function closeFtpConnection()
     {

@@ -4,16 +4,14 @@ namespace TreeHouse\Feeder\Transport;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Event\CompleteEvent;
-use GuzzleHttp\Event\ProgressEvent;
-use GuzzleHttp\Event\SubscriberInterface;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Message\RequestInterface;
+use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\ResponseInterface;
 use TreeHouse\Feeder\Event\FetchProgressEvent;
 use TreeHouse\Feeder\Exception\TransportException;
 use TreeHouse\Feeder\FeedEvents;
 
-class HttpTransport extends AbstractTransport implements SubscriberInterface, ProgressAwareInterface
+class HttpTransport extends AbstractTransport implements ProgressAwareInterface
 {
     /**
      * @var ClientInterface
@@ -21,7 +19,7 @@ class HttpTransport extends AbstractTransport implements SubscriberInterface, Pr
     protected $client;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $size;
 
@@ -39,11 +37,14 @@ class HttpTransport extends AbstractTransport implements SubscriberInterface, Pr
      */
     public static function create($url, $user = null, $pass = null)
     {
-        $client = new Client();
-        $client->setDefaultOption('headers/User-Agent', static::getDefaultUserAgent());
+        $client = new Client([
+            'headers' => [
+                'User-Agent' => static::getDefaultUserAgent(),
+            ],
+        ]);
 
         $conn = new Connection([
-            'url'  => $url,
+            'url' => $url,
             'user' => $user,
             'pass' => $pass,
         ]);
@@ -106,7 +107,6 @@ class HttpTransport extends AbstractTransport implements SubscriberInterface, Pr
     public function setClient(ClientInterface $client)
     {
         $this->client = $client;
-        $this->client->getEmitter()->attach($this);
     }
 
     /**
@@ -126,7 +126,7 @@ class HttpTransport extends AbstractTransport implements SubscriberInterface, Pr
     }
 
     /**
-     * @return integer|null
+     * @return int|null
      */
     public function getSize()
     {
@@ -134,54 +134,26 @@ class HttpTransport extends AbstractTransport implements SubscriberInterface, Pr
     }
 
     /**
-     * @inheritdoc
+     * @param ResponseInterface $response
      */
-    public function getEvents()
+    public function onHeaders(ResponseInterface $response)
     {
-        return [
-            'complete' => ['onComplete', 'first'],
-            'progress' => ['onProgress'],
-        ];
+        // set the modified date if we got it in the response
+        if (!empty($lastModified = $response->getHeader('Last-Modified'))) {
+            $this->lastModified = new \DateTime(reset($lastModified));
+        }
     }
 
     /**
-     * @param ProgressEvent $event
+     * @param int $downloadSize
+     * @param int $downloaded
      */
-    public function onProgress(ProgressEvent $event)
+    public function onProgress($downloadSize, $downloaded)
     {
-        $this->size = $event->downloadSize;
+        $this->size = $downloadSize;
 
-        $progressEvent = new FetchProgressEvent($event->downloaded, $event->downloadSize);
+        $progressEvent = new FetchProgressEvent($downloaded, $downloadSize);
         $this->eventDispatcher->dispatch(FeedEvents::FETCH_PROGRESS, $progressEvent);
-    }
-
-    /**
-     * @param CompleteEvent $event
-     */
-    public function onComplete(CompleteEvent $event)
-    {
-        if (($response = $event->getResponse()) && ($lastModified = $response->getHeader('Last-Modified'))) {
-            $this->lastModified = new \DateTime($lastModified);
-        }
-    }
-
-    /**
-     * @throws \LogicException
-     *
-     * @return RequestInterface
-     */
-    protected function createRequest()
-    {
-        if (!$this->client) {
-            throw new \LogicException('No client set to use for downloading');
-        }
-
-        $options = [];
-        if (($user = $this->getUser()) && ($pass = $this->getPass())) {
-            $options['auth'] = [$user, $pass];
-        }
-
-        return $this->client->createRequest('GET', $this->getUrl(), $options);
     }
 
     /**
@@ -189,23 +161,29 @@ class HttpTransport extends AbstractTransport implements SubscriberInterface, Pr
      */
     protected function doFetch($destination)
     {
-        $request = $this->createRequest();
+        if (!$this->client) {
+            throw new \LogicException('No client set to use for downloading');
+        }
+
+        $options = [
+            RequestOptions::SINK => $destination,
+            RequestOptions::ON_HEADERS => [$this, 'onHeaders'],
+            RequestOptions::PROGRESS => [$this, 'onProgress'],
+        ];
+
+        if (($user = $this->getUser()) && ($pass = $this->getPass())) {
+            $options['auth'] = [$user, $pass];
+        }
 
         try {
-            $response = $this->client->send($request);
+            $response = $this->client->request('GET', $this->getUrl(), $options);
+
+            if ($response->getBody()->getSize() === 0) {
+                throw new TransportException('Server did not return any content, status code was ' . $response->getStatusCode());
+            }
         } catch (RequestException $e) {
             throw new TransportException(sprintf('Could not download feed: %s', $e->getMessage()), null, $e);
         }
-
-        if (!$body = $response->getBody()) {
-            throw new TransportException('Server did not return any content, status code was ' . $response->getStatusCode());
-        }
-
-        $f = fopen($destination, 'w');
-        while (!$body->eof()) {
-            fwrite($f, $body->read(1024));
-        }
-        fclose($f);
     }
 
     /**

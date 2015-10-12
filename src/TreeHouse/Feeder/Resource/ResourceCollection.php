@@ -67,7 +67,7 @@ class ResourceCollection extends \SplStack
     }
 
     /**
-     * @param integer $index
+     * @param int $index
      *
      * @return ResourceInterface
      */

@@ -10,13 +10,13 @@ class UnderscoreKeysTransformerTest extends \PHPUnit_Framework_TestCase
     public function testUnderscoreKeys()
     {
         $item = new ParameterBag([
-            'testScore'   => 'test',
-            'test1Score'  => 'test',
-            '2TestScore'  => 'test',
+            'testScore' => 'test',
+            'test1Score' => 'test',
+            '2TestScore' => 'test',
             '3test_Score' => 'test',
             '4test-Score' => 'test',
-            'TesTScore'   => 'test',
-            'testscore'   => [
+            'TesTScore' => 'test',
+            'testscore' => [
                 'underScore' => 'test',
             ],
         ]);
@@ -26,13 +26,13 @@ class UnderscoreKeysTransformerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             [
-                'test_score'  => 'test',
-                'test1score'  => 'test',
+                'test_score' => 'test',
+                'test1score' => 'test',
                 '2test_score' => 'test',
                 '3test_score' => 'test',
                 '4test_score' => 'test',
                 'tes_tscore' => 'test',
-                'testscore'   => [
+                'testscore' => [
                     'under_score' => 'test',
                 ],
             ],

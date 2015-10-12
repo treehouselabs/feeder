@@ -13,7 +13,7 @@ class ExpandAttributesTransformer implements TransformerInterface
     protected $field;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $removeOriginal;
 
@@ -23,10 +23,10 @@ class ExpandAttributesTransformer implements TransformerInterface
     protected $overwriteExisting;
 
     /**
-     * @param string  $field             Expand attributes in this field, if omitted, all root-level attributes are
-     *                                   expanded
-     * @param boolean $removeOriginal    Whether to remove the original attribute
-     * @param array   $overwriteExisting Keys that may be overwritten when they already exist
+     * @param string $field             Expand attributes in this field, if omitted, all root-level attributes are
+     *                                  expanded
+     * @param bool   $removeOriginal    Whether to remove the original attribute
+     * @param array  $overwriteExisting Keys that may be overwritten when they already exist
      *
      * @throws UnexpectedTypeException
      */
@@ -36,8 +36,8 @@ class ExpandAttributesTransformer implements TransformerInterface
             throw new UnexpectedTypeException($field, 'string or null');
         }
 
-        $this->field             = $field;
-        $this->removeOriginal    = $removeOriginal;
+        $this->field = $field;
+        $this->removeOriginal = $removeOriginal;
         $this->overwriteExisting = $overwriteExisting;
     }
 

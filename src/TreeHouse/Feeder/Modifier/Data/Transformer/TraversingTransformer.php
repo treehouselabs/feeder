@@ -7,7 +7,7 @@ use TreeHouse\Feeder\Exception\TransformationFailedException;
 class TraversingTransformer implements TransformerInterface
 {
     /**
-     * Transformer that will be applied to each value
+     * Transformer that will be applied to each value.
      *
      * @var TransformerInterface
      */

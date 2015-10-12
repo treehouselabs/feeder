@@ -48,7 +48,7 @@ class ExpandNodeTransformerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             [
                 'src' => 'foo',
-                'bar'  => 'baz',
+                'bar' => 'baz',
             ],
             $this->item->all()
         );

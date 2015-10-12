@@ -6,7 +6,7 @@ use TreeHouse\Feeder\Modifier\Data\Transformer\LocalizedStringToNumberTransforme
 use TreeHouse\Feeder\Modifier\Data\Transformer\TransformerInterface;
 
 /**
- * Test LocalizedStringToNumberTransformer
+ * Test LocalizedStringToNumberTransformer.
  */
 class LocalizedStringToNumberTransformerTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,7 +16,7 @@ class LocalizedStringToNumberTransformerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test construction
+     * Test construction.
      */
     public function testConstructor()
     {

@@ -27,9 +27,9 @@ abstract class AbstractTransport implements TransportInterface
     protected $destinationDir;
 
     /**
-     * The number of seconds that the transport may be cached
+     * The number of seconds that the transport may be cached.
      *
-     * @var integer
+     * @var int
      */
     protected $maxAge;
 
@@ -50,10 +50,10 @@ abstract class AbstractTransport implements TransportInterface
      */
     public function __construct(Connection $conn, $destination = null, EventDispatcherInterface $dispatcher = null)
     {
-        $this->connection      = $conn;
-        $this->destination     = $destination;
+        $this->connection = $conn;
+        $this->destination = $destination;
         $this->eventDispatcher = $dispatcher ?: new EventDispatcher();
-        $this->maxAge          = 86400;
+        $this->maxAge = 86400;
     }
 
     /**
@@ -62,7 +62,7 @@ abstract class AbstractTransport implements TransportInterface
     public function __clone()
     {
         $this->destination = null;
-        $this->connection  = clone $this->connection;
+        $this->connection = clone $this->connection;
     }
 
     /**
@@ -106,7 +106,7 @@ abstract class AbstractTransport implements TransportInterface
     }
 
     /**
-     * @param integer $seconds
+     * @param int $seconds
      */
     public function setMaxAge($seconds)
     {
@@ -114,7 +114,7 @@ abstract class AbstractTransport implements TransportInterface
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getMaxAge()
     {
@@ -244,9 +244,7 @@ abstract class AbstractTransport implements TransportInterface
 
     /**
      * Purges a previously transported file, removing the destination and
-     * whatever cache the transport uses internally
-     *
-     * @return void
+     * whatever cache the transport uses internally.
      */
     public function purge()
     {
@@ -271,7 +269,7 @@ abstract class AbstractTransport implements TransportInterface
      * @param string    $destination
      * @param \DateTime $maxAge
      *
-     * @return boolean
+     * @return bool
      */
     protected function isFresh($destination, \DateTime $maxAge = null)
     {
@@ -286,7 +284,7 @@ abstract class AbstractTransport implements TransportInterface
         }
 
         // download if ttl is passed
-        $mtime = new \Datetime('@'.filemtime($destination));
+        $mtime = new \Datetime('@' . filemtime($destination));
 
         // see if cache has expired
         if ($mtime < $maxAge) {
@@ -303,7 +301,7 @@ abstract class AbstractTransport implements TransportInterface
     }
 
     /**
-     * Fetches the resource, makes sure a file is present at the given destination
+     * Fetches the resource, makes sure a file is present at the given destination.
      *
      * @param string $destination
      */

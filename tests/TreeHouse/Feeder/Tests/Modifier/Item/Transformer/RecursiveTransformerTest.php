@@ -2,9 +2,9 @@
 
 namespace TreeHouse\Feeder\Tests\Modifier\Item\Transformer;
 
+use Symfony\Component\HttpFoundation\ParameterBag;
 use TreeHouse\Feeder\Modifier\Data\Transformer\EmptyValueToNullTransformer;
 use TreeHouse\Feeder\Modifier\Item\Transformer\RecursiveTransformer;
-use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
  * Test recursive an array, EmptyValueToNullTransformer is used to test.
@@ -30,15 +30,15 @@ class RecursiveTransformerTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 ['array', ['value1', 'value2', '', ['value3', 'value4', '']]],
-                ['array', ['value1', 'value2', null, ['value3', 'value4', null]]]
+                ['array', ['value1', 'value2', null, ['value3', 'value4', null]]],
             ],
             [
                 ['key' => 'value'],
-                ['key' => 'value']
+                ['key' => 'value'],
             ],
             [
                 ['key' => 'value', 'aap' => 'banaan'],
-                ['key' => 'value', 'aap' => 'banaan']
+                ['key' => 'value', 'aap' => 'banaan'],
             ],
         ];
     }

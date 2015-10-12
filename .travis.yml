@@ -1,4 +1,10 @@
+# use Docker infrastructure
 sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
 language: php
 php:
   - 5.5
@@ -9,22 +15,18 @@ php:
 matrix:
   fast_finish: true
   allow_failures:
-    - php: 7.0
     - php: hhvm
 
 cache:
   directories:
     - $HOME/.composer/cache
 
-install:
-  - composer self-update
-
 before_script:
-  - composer install --no-interaction
+  - travis_retry composer self-update
+  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
 
 script:
-  - ./vendor/bin/phpunit --coverage-clover=coverage.clover
+  - ./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
 after_script:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+  - if [[ $TRAVIS_PHP_VERSION != 'hhvm' && $TRAVIS_PHP_VERSION != '7.0' ]]; then php vendor/bin/ocular code-coverage:upload --format=php-clover coverage.clover; fi

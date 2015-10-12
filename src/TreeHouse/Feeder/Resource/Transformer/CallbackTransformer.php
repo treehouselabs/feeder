@@ -3,11 +3,11 @@
 namespace TreeHouse\Feeder\Resource\Transformer;
 
 use TreeHouse\Feeder\Exception\UnexpectedTypeException;
-use TreeHouse\Feeder\Resource\ResourceInterface;
 use TreeHouse\Feeder\Resource\ResourceCollection;
+use TreeHouse\Feeder\Resource\ResourceInterface;
 
 /**
- * Uses a callback to transform a resource
+ * Uses a callback to transform a resource.
  */
 class CallbackTransformer implements ResourceTransformerInterface
 {

@@ -18,7 +18,7 @@ class ExpandAttributesTransformerTest extends \PHPUnit_Framework_TestCase
             '@id' => 1234,
             'img' => [
                 '@src' => 'foo',
-                'bar'  => 'baz',
+                'bar' => 'baz',
             ],
         ]);
     }
@@ -41,8 +41,8 @@ class ExpandAttributesTransformerTest extends \PHPUnit_Framework_TestCase
                 '@id' => 1234,
                 'img' => [
                     '@src' => 'foo',
-                    'src'  => 'foo',
-                    'bar'  => 'baz'
+                    'src' => 'foo',
+                    'bar' => 'baz',
                 ],
             ],
             $this->item->all()
@@ -76,10 +76,10 @@ class ExpandAttributesTransformerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             [
                 '@id' => 1234,
-                'id'  => 1234,
+                'id' => 1234,
                 'img' => [
                     '@src' => 'foo',
-                    'bar'  => 'baz',
+                    'bar' => 'baz',
                 ],
             ],
             $this->item->all()
@@ -96,7 +96,7 @@ class ExpandAttributesTransformerTest extends \PHPUnit_Framework_TestCase
                 '@id' => 1234,
                 'img' => [
                     'src' => 'foo',
-                    'bar' => 'baz'
+                    'bar' => 'baz',
                 ],
             ],
             $this->item->all()
@@ -110,10 +110,10 @@ class ExpandAttributesTransformerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             [
-                'id'  => 1234,
+                'id' => 1234,
                 'img' => [
                     '@src' => 'foo',
-                    'bar'  => 'baz'
+                    'bar' => 'baz',
                 ],
             ],
             $this->item->all()
@@ -125,7 +125,7 @@ class ExpandAttributesTransformerTest extends \PHPUnit_Framework_TestCase
         $item = new ParameterBag([
             'img' => [
                 '@src' => 'foo',
-                'src'  => 'baz'
+                'src' => 'baz',
             ],
         ]);
 
@@ -135,7 +135,7 @@ class ExpandAttributesTransformerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             [
                 'img' => [
-                    'src' => 'baz'
+                    'src' => 'baz',
                 ],
             ],
             $item->all()
@@ -147,7 +147,7 @@ class ExpandAttributesTransformerTest extends \PHPUnit_Framework_TestCase
         $item = new ParameterBag([
             'img' => [
                 '@src' => 'foo',
-                'src'  => 'baz'
+                'src' => 'baz',
             ],
         ]);
 
@@ -157,7 +157,7 @@ class ExpandAttributesTransformerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             [
                 'img' => [
-                    'src' => 'foo'
+                    'src' => 'foo',
                 ],
             ],
             $item->all()
@@ -168,7 +168,7 @@ class ExpandAttributesTransformerTest extends \PHPUnit_Framework_TestCase
     {
         $item = new ParameterBag([
             '@id' => 1234,
-            'id'  => 'foo',
+            'id' => 'foo',
         ]);
 
         $transformer = new ExpandAttributesTransformer(null, true);
@@ -176,7 +176,7 @@ class ExpandAttributesTransformerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             [
-                'id'  => 'foo',
+                'id' => 'foo',
             ],
             $item->all()
         );
@@ -186,7 +186,7 @@ class ExpandAttributesTransformerTest extends \PHPUnit_Framework_TestCase
     {
         $item = new ParameterBag([
             '@id' => 1234,
-            'id'  => 'foo',
+            'id' => 'foo',
         ]);
 
         $transformer = new ExpandAttributesTransformer(null, true, ['id']);

@@ -19,7 +19,7 @@ class CsvReader extends AbstractReader
     protected $mapping;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $useFirstRow;
 
@@ -39,7 +39,7 @@ class CsvReader extends AbstractReader
     protected $escape = '\\';
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $convertNull;
 
@@ -57,7 +57,7 @@ class CsvReader extends AbstractReader
     /**
      * When true, the first row in the CSV file is used to generate the field mapping.
      *
-     * @param boolean $bool
+     * @param bool $bool
      */
     public function useFirstRow($bool = true)
     {
@@ -89,7 +89,7 @@ class CsvReader extends AbstractReader
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getRowNumber()
     {
@@ -99,7 +99,7 @@ class CsvReader extends AbstractReader
     /**
      * When true, "null" and "NULL" are converted to NULL.
      *
-     * @param boolean $bool
+     * @param bool $bool
      */
     public function convertNull($bool = true)
     {

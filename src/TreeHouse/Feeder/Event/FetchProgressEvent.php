@@ -9,31 +9,31 @@ class FetchProgressEvent extends Event
     /**
      * The number of bytes fetched so far.
      *
-     * @var integer
+     * @var int
      */
     protected $bytesFetched;
 
     /**
      * The number of bytes to fetch in total.
      *
-     * @var integer
+     * @var int
      */
     protected $bytesTotal;
 
     /**
-     * @param integer $fetched
-     * @param integer $total
+     * @param int $fetched
+     * @param int $total
      */
     public function __construct($fetched, $total)
     {
         $this->bytesFetched = $fetched;
-        $this->bytesTotal   = $total;
+        $this->bytesTotal = $total;
     }
 
     /**
      * Returns the total number of bytes fetched so far.
      *
-     * @return integer
+     * @return int
      */
     public function getBytesFetched()
     {
@@ -41,9 +41,9 @@ class FetchProgressEvent extends Event
     }
 
     /**
-     * Returns the total number of bytes to be fetched
+     * Returns the total number of bytes to be fetched.
      *
-     * @return integer
+     * @return int
      */
     public function getBytesTotal()
     {

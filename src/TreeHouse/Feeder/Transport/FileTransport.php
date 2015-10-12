@@ -24,7 +24,7 @@ class FileTransport extends AbstractTransport
     }
 
     /**
-     * Factory method
+     * Factory method.
      *
      * @param string $file
      *
@@ -48,11 +48,11 @@ class FileTransport extends AbstractTransport
      */
     public function getLastModifiedDate()
     {
-        return new \DateTime('@'.filemtime($this->connection['file']));
+        return new \DateTime('@' . filemtime($this->connection['file']));
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getSize()
     {

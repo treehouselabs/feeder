@@ -46,9 +46,9 @@ XML
                             0 => 'http://example.org/photo1.jpg',
                             1 => 'http://example.org/photo2.jpg',
                             2 => 'http://example.org/photo3.jpg',
-                        ]
-                    ]
-                ]
+                        ],
+                    ],
+                ],
             ],
             [
                 <<<XML
@@ -62,7 +62,7 @@ XML
                 [
                     'photos' => [],
                 ],
-            ]
+            ],
         ];
     }
 }

@@ -11,8 +11,8 @@ class FailedItemModificationEventTest extends \PHPUnit_Framework_TestCase
 {
     public function testEvent()
     {
-        $item      = new ParameterBag();
-        $modifier  = new CallbackTransformer(function () {});
+        $item = new ParameterBag();
+        $modifier = new CallbackTransformer(function () {});
         $exception = new ModificationException();
 
         $event = new FailedItemModificationEvent($item, $modifier, $exception);

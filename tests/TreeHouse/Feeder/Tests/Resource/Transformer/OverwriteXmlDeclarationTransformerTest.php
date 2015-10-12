@@ -13,13 +13,13 @@ class OverwriteXmlDeclarationTransformerTest extends \PHPUnit_Framework_TestCase
      */
     public function testTransform($from, $to)
     {
-        $resource   = new StringResource($from);
+        $resource = new StringResource($from);
         $collection = new ResourceCollection([$resource]);
 
         $transformer = new OverwriteXmlDeclarationTransformer();
 
         $resource = $transformer->transform($resource, $collection);
-        $file     = $resource->getFile()->getPathname();
+        $file = $resource->getFile()->getPathname();
 
         $this->assertSame($to, file_get_contents($file));
     }
