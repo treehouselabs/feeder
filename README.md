@@ -1,11 +1,19 @@
 Feeder
 ======
 
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE.md)
+[![Build Status][ico-travis]][link-travis]
+[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
+[![Quality Score][ico-code-quality]][link-code-quality]
+
 Library containing functions to download, parse, transform and export different types of feeds.
 
-[![Build Status](https://travis-ci.org/treehouselabs/feeder.svg)](https://travis-ci.org/treehouselabs/feeder)
-[![Code Coverage](https://scrutinizer-ci.com/g/treehouselabs/feeder/badges/coverage.png)](https://scrutinizer-ci.com/g/treehouselabs/feeder/)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/treehouselabs/feeder/badges/quality-score.png)](https://scrutinizer-ci.com/g/treehouselabs/feeder/)
+## Installation
+
+```sh
+composer require treehouselabs/feeder:~1.0
+```
 
 ## Usage
 
@@ -78,10 +86,10 @@ $feed->addTransformer(new LowercaseKeysTransformer());
 Now we want the publish date to be an actual `DateTime` instance:
 
 ```php
-// the DataTransformer wraps a transformer for a specific field, 
+// the DataTransformer wraps a transformer for a specific field,
 // instead of the whole item
 $transformer = new DataTransformer(
-    new StringToDateTimeTransformer(DATE_RFC2822), 
+    new StringToDateTimeTransformer(DATE_RFC2822),
     'publish_date'
 );
 $feed->addTransformer($transformer);
@@ -107,7 +115,7 @@ Some more examples:
 ```php
 $feed->addTransformer(
   new DataTransformer(
-    new StringToBooleanTransformer(), 
+    new StringToBooleanTransformer(),
     'explicit'
   )
 );
@@ -136,4 +144,42 @@ to transformative functions, there are mappers (map keys in the item to your own
 on your own logic) and validators (raises exceptions when an item is invalid). There are a lot of modifiers that come
 with this library, [check them out][modifiers]!
 
+
+## Testing
+
+``` bash
+composer test
+```
+
+## Security
+
+If you discover any security related issues, please email peter@treehouse.nl instead of using the issue tracker.
+
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+
+## Credits
+
+- [Peter Kruithof][link-author]
+- [All Contributors][link-contributors]
+
+
 [modifiers]: /src/TreeHouse/Feeder/Modifier
+
+[ico-version]: https://img.shields.io/packagist/v/treehouselabs/feeder.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/treehouselabs/feeder/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/treehouselabs/feeder.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/treehouselabs/feeder.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/treehouselabs/feeder.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/treehouselabs/feeder
+[link-travis]: https://travis-ci.org/treehouselabs/feeder
+[link-scrutinizer]: https://scrutinizer-ci.com/g/treehouselabs/feeder/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/treehouselabs/feeder
+[link-downloads]: https://packagist.org/packages/treehouselabs/feeder
+[link-author]: https://github.com/treehouselabs
+[link-contributors]: ../../contributors

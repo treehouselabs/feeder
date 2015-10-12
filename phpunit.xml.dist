@@ -10,11 +10,11 @@
   processIsolation            = "false"
   stopOnFailure               = "false"
   syntaxCheck                 = "false"
-  bootstrap                   = "tests/bootstrap.php">
+  bootstrap                   = "vendor/autoload.php">
 
   <testsuites>
-    <testsuite name="Feeder test suite">
-      <directory suffix="Test.php">./tests</directory>
+    <testsuite name="Feeder Test Suite">
+      <directory>./tests</directory>
     </testsuite>
   </testsuites>
 
@@ -23,4 +23,9 @@
       <directory suffix=".php">./src</directory>
     </whitelist>
   </filter>
+
+  <logging>
+    <log type="coverage-text" target="php://stdout"/>
+    <log type="coverage-html" target="build/coverage" charset="UTF-8" yui="true" highlight="true"/>
+  </logging>
 </phpunit>
