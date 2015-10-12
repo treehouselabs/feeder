@@ -3,10 +3,8 @@
 namespace TreeHouse\Feeder\Tests\Transport;
 
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Event\Emitter;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Message\RequestInterface;
-use GuzzleHttp\Message\ResponseInterface;
+use Psr\Http\Message\ResponseInterface;
 use TreeHouse\Feeder\FeedEvents;
 use TreeHouse\Feeder\Tests\Mock\EventDispatcherMock;
 use TreeHouse\Feeder\Transport\Connection;
@@ -71,38 +69,20 @@ class HttpTransportTest extends AbstractTransportTest
     {
         /** @var RequestException|\PHPUnit_Framework_MockObject_MockObject $exception */
         $exception = $this->getMockBuilder(RequestException::class)->disableOriginalConstructor()->getMock();
-        $request   = $this->getMockBuilder(RequestInterface::class)->getMockForAbstractClass();
 
         /** @var ClientInterface|\PHPUnit_Framework_MockObject_MockObject $client */
         $client = $this
             ->getMockBuilder(ClientInterface::class)
-            ->setMethods(['send'])
+            ->setMethods(['request'])
             ->getMockForAbstractClass()
         ;
         $client
             ->expects($this->once())
-            ->method('send')
+            ->method('request')
             ->will($this->throwException($exception))
         ;
-        $client
-            ->expects($this->any())
-            ->method('getEmitter')
-            ->will($this->returnValue(new Emitter()))
-        ;
 
-        /** @var HttpTransport|\PHPUnit_Framework_MockObject_MockObject $transport */
-        $transport = $this
-            ->getMockBuilder(HttpTransport::class)
-            ->setMethods(['createRequest'])
-            ->setConstructorArgs([new Connection([])])
-            ->getMock()
-        ;
-        $transport
-            ->expects($this->once())
-            ->method('createRequest')
-            ->will($this->returnValue($request))
-        ;
-
+        $transport = HttpTransport::create('http://example.org');
         $transport->setClient($client);
         $transport->getFile();
     }
@@ -112,45 +92,27 @@ class HttpTransportTest extends AbstractTransportTest
      */
     public function testEmptyBody()
     {
-        $request  = $this->getMockBuilder(RequestInterface::class)->getMockForAbstractClass();
         $response = $this->getMockBuilder(ResponseInterface::class)->getMockForAbstractClass();
 
         $response
             ->expects($this->once())
             ->method('getBody')
-            ->will($this->returnValue(null))
+            ->will($this->returnValue(\GuzzleHttp\Psr7\stream_for('')))
         ;
 
         /** @var ClientInterface|\PHPUnit_Framework_MockObject_MockObject $client */
         $client = $this
             ->getMockBuilder(ClientInterface::class)
-            ->setMethods(['send'])
+            ->setMethods(['request'])
             ->getMockForAbstractClass()
         ;
         $client
             ->expects($this->once())
-            ->method('send')
+            ->method('request')
             ->will($this->returnValue($response))
         ;
-        $client
-            ->expects($this->any())
-            ->method('getEmitter')
-            ->will($this->returnValue(new Emitter()))
-        ;
 
-        /** @var HttpTransport|\PHPUnit_Framework_MockObject_MockObject $transport */
-        $transport = $this
-            ->getMockBuilder(HttpTransport::class)
-            ->setMethods(['createRequest'])
-            ->setConstructorArgs([new Connection([])])
-            ->getMock()
-        ;
-        $transport
-            ->expects($this->once())
-            ->method('createRequest')
-            ->will($this->returnValue($request))
-        ;
-
+        $transport = HttpTransport::create('http://example.org');
         $transport->setClient($client);
         $transport->getFile();
     }
