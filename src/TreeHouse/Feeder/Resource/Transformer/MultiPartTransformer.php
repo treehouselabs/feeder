@@ -125,6 +125,7 @@ class MultiPartTransformer implements ResourceTransformerInterface
         $this->reader->setResources(new ResourceCollection([$resource]));
 
         $partCount = 0;
+        $started = false;
         while ($this->reader->valid()) {
             if ($this->reader->key() % $this->size === 0) {
                 if ($this->reader->key() > 0) {
@@ -133,6 +134,7 @@ class MultiPartTransformer implements ResourceTransformerInterface
 
                 $file = sprintf('%s.part%s', $baseFile, ++$partCount);
                 $this->startPart($file);
+                $started = true;
             }
 
             $this->writer->write($this->reader->current());
@@ -140,8 +142,10 @@ class MultiPartTransformer implements ResourceTransformerInterface
 
             $this->reader->next();
         }
-
-        $this->endPart();
+        
+        if ($started) {
+            $this->endPart();
+        }
 
         return $this->getPartFiles($resource);
     }
