@@ -2,6 +2,7 @@
 
 namespace TreeHouse\Feeder\Tests\Transport;
 
+use Guzzle\Http\Message\Response;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\ResponseInterface;
@@ -144,6 +145,38 @@ class HttpTransportTest extends AbstractTransportTest
         $event = end($events[FeedEvents::FETCH_PROGRESS]);
         $this->assertGreaterThan(0, $event->getBytesFetched());
         $this->assertGreaterThan(0, $event->getBytesTotal());
+    }
+
+    public function testEmptyPass()
+    {
+        $response = $this->getMockBuilder(ResponseInterface::class)->getMockForAbstractClass();
+
+        $response
+            ->expects($this->once())
+            ->method('getBody')
+            ->will($this->returnValue(\GuzzleHttp\Psr7\stream_for('Some body')))
+        ;
+
+        /** @var ClientInterface|\PHPUnit_Framework_MockObject_MockObject $client */
+        $client = $this
+            ->getMockBuilder(ClientInterface::class)
+            ->setMethods(['request'])
+            ->getMockForAbstractClass()
+        ;
+        $client
+            ->expects($this->once())
+            ->method('request')
+            ->with('GET', 'http://example.org', $this->callback(function($arg) {
+                $this->assertEquals(['user', ''], $arg['auth']);
+
+                return true;
+            }))
+            ->will($this->returnValue($response))
+        ;
+
+        $transport = HttpTransport::create('http://example.org', 'user', '');
+        $transport->setClient($client);
+        $transport->getFile();
     }
 
     /**
