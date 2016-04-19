@@ -171,8 +171,8 @@ class HttpTransport extends AbstractTransport implements ProgressAwareInterface
             RequestOptions::PROGRESS => [$this, 'onProgress'],
         ];
 
-        if (($user = $this->getUser()) && ($pass = $this->getPass())) {
-            $options['auth'] = [$user, $pass];
+        if ($user = $this->getUser()) {
+            $options['auth'] = [$user, $this->getPass()];
         }
 
         try {
