@@ -1,3 +1,7 @@
+## 1.1.0
+
+* Added JsonLines support. See http://jsonlines.org for information about the format.
+
 ## 1.0.0
 
 This is the first stable release of Feeder and has diverged a bit from the
