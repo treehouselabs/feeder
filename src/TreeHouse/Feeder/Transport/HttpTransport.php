@@ -8,6 +8,7 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 use TreeHouse\Feeder\Event\FetchProgressEvent;
+use TreeHouse\Feeder\Exception\EmptyResponseException;
 use TreeHouse\Feeder\Exception\TransportException;
 use TreeHouse\Feeder\FeedEvents;
 
@@ -179,7 +180,7 @@ class HttpTransport extends AbstractTransport implements ProgressAwareInterface
             $response = $this->client->request('GET', $this->getUrl(), $options);
 
             if ($response->getBody()->getSize() === 0) {
-                throw new TransportException('Server did not return any content, status code was ' . $response->getStatusCode());
+                throw new EmptyResponseException($response);
             }
         } catch (RequestException $e) {
             throw new TransportException(sprintf('Could not download feed: %s', $e->getMessage()), null, $e);

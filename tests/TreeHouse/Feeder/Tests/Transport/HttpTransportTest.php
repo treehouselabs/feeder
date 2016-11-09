@@ -180,6 +180,36 @@ class HttpTransportTest extends AbstractTransportTest
     }
 
     /**
+     * @expectedException \TreeHouse\Feeder\Exception\EmptyResponseException
+     */
+    public function testEmptyResponseThrowsException()
+    {
+        $response = $this->getMockBuilder(ResponseInterface::class)->getMockForAbstractClass();
+
+        $response
+            ->expects($this->once())
+            ->method('getBody')
+            ->will($this->returnValue(\GuzzleHttp\Psr7\stream_for('')))
+        ;
+
+        /** @var ClientInterface|\PHPUnit_Framework_MockObject_MockObject $client */
+        $client = $this
+            ->getMockBuilder(ClientInterface::class)
+            ->setMethods(['request'])
+            ->getMockForAbstractClass()
+        ;
+        $client
+            ->expects($this->once())
+            ->method('request')
+            ->will($this->returnValue($response))
+        ;
+
+        $transport = HttpTransport::create('http://example.org');
+        $transport->setClient($client);
+        $transport->getFile();
+    }
+
+    /**
      * @return HttpTransport
      */
     protected function getTransport()
