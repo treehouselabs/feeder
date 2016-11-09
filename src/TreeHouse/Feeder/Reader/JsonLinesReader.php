@@ -3,13 +3,14 @@
 namespace TreeHouse\Feeder\Reader;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
+use TreeHouse\Feeder\Exception\EmptyResponseException;
 use TreeHouse\Feeder\Exception\ReadException;
 use TreeHouse\Feeder\Resource\ResourceInterface;
 
 class JsonLinesReader extends AbstractReader
 {
     /**
-     * @var \SplFileObject
+     * @var \Iterator
      */
     protected $fileObject;
 
@@ -19,7 +20,7 @@ class JsonLinesReader extends AbstractReader
      * @param string $data
      *
      * @return ParameterBag
-     * 
+     *
      * @throws ReadException
      */
     protected function serialize($data)
@@ -44,9 +45,15 @@ class JsonLinesReader extends AbstractReader
      */
     protected function createReader(ResourceInterface $resource)
     {
-        $jsonFile = $resource->getFile()->getPathname();
+        try {
+            $jsonFile = $resource->getFile()->getPathname();
 
-        $this->fileObject = new \SplFileObject($jsonFile);
+            $this->fileObject = new \SplFileObject($jsonFile);
+        } catch (EmptyResponseException $e) {
+            // getting an empty response is not a problem for jsonlines files, this
+            // just means that there are no records.
+            $this->fileObject = new \ArrayIterator();
+        }
     }
 
     /**
