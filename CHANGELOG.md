@@ -1,6 +1,12 @@
+## 1.1.1
+
+* Supressed FTP login warnings (#14)
+
+
 ## 1.1.0
 
 * Added JsonLines support. See http://jsonlines.org for information about the format.
+
 
 ## 1.0.0
 
