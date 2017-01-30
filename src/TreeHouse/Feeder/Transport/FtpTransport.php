@@ -338,7 +338,7 @@ class FtpTransport extends AbstractTransport implements ProgressAwareInterface
     protected function connect($host, $user, $pass)
     {
         $conn = ftp_connect($host);
-        if (($conn === false) || (ftp_login($conn, $user, $pass) === false)) {
+        if (($conn === false) || (@ftp_login($conn, $user, $pass) === false)) {
             throw new TransportException(
                 is_resource($conn) ? 'Could not login to FTP' : 'Could not make FTP connection'
             );
