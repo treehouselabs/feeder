@@ -1,6 +1,11 @@
-## 1.1.1
+## 1.1.2
 
 * Supressed FTP login warnings (#14)
+
+
+## 1.1.1
+
+* Don't error on empty jsonlines file (#12)
 
 
 ## 1.1.0
