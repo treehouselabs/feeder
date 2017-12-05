@@ -1,3 +1,7 @@
+## 1.1.3
+
+* Don't connect to ftp in `__toString` method (#15)
+
 ## 1.1.2
 
 * Supressed FTP login warnings (#14)
