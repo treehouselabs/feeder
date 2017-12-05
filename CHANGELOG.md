@@ -1,3 +1,7 @@
+## 1.1.4
+
+* Fixed typo (#16)
+
 ## 1.1.3
 
 * Don't connect to ftp in `__toString` method (#15)
