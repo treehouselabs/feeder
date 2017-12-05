@@ -69,8 +69,8 @@ class FtpTransport extends AbstractTransport implements ProgressAwareInterface
 
     public function __toString()
     {
-        if ($this->filename) {
-            $file = $this->filename;
+        if ($this->fileName) {
+            $file = $this->fileName;
         } else {
             $file = $this->connection['file'];
         }
