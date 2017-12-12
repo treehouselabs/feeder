@@ -64,9 +64,13 @@ class MultiPartTransformer implements ResourceTransformerInterface
             }
         }
 
-        $collection->unshiftAll($resources);
+        if ($resources) {
+            $collection->unshiftAll($resources);
 
-        return $collection->shift();
+            return $collection->shift();
+        }
+
+        return $resource;
     }
 
     /**
